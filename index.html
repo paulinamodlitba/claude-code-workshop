@@ -368,15 +368,21 @@ winget install --id GitHub.cli</div>
         <span class="level level-medium">Block 3 · Steg 2</span>
         <p>Nu bygger vi en agent: en specialist som löser en riktig uppgift åt ditt företag. Först ber vi Claude generera fiktiv data som passar just ditt företag, sedan skapar vi en agent som jobbar med den. Välj ett spår.</p>
 
+        <div class="note" style="margin-top: 16px; margin-bottom: 24px;">
+            <strong>Agent vs skill, vad är skillnaden?</strong><br>
+            En agent är en markdown-fil i <code>.claude/agents/</code> som fungerar som en specialiserad "roll". Agenten får sin egen konversation med egna instruktioner, men kan läsa filer och använda verktyg precis som vanligt. Tänk på det som att anställa en specialist som alltid följer en specifik arbetsprocess.<br><br>
+            Agenter passar för uppgifter som kräver flera steg, läsning av flera filer och längre output, som att bygga en presentation eller analysera data. En skill passar bättre för kortare, mer repetitiva instruktioner, som att alltid formatera mejl på ett visst sätt.
+        </div>
+
         <div class="prompt" style="margin-bottom: 16px;">
             <strong>Spår A: Presentationsbyggaren</strong><br>
             En potentiell kund har hört av sig och du har ett möte på fredag. Du behöver ett presentationsunderlag, snabbt.<br><br>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>kundbrief.txt</code>. Hitta på en trovärdig potentiell kund till vårt företag som vill ha hjälp med något vi erbjuder. Skriv briefen från kundens perspektiv: vad de behöver, vilken målgrupp de har, vad presentationen ska användas till och vilken ton de vill ha. Gör det realistiskt baserat på vår verksamhet i CLAUDE.md."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag med struktur, talarpunkter och designförslag, i linje med vår varumärkesröst i CLAUDE.md."<br><br>
+            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag som en <code>.pptx</code>-fil (PowerPoint) med struktur, talarpunkter och designförslag, i linje med vår varumärkesröst och visuella identitet i CLAUDE.md."<br><br>
             <strong>Steg 3: Testa</strong><br>
-            → "Läs kundbriefet och skapa ett presentationsunderlag som följer vår grafiska profil."
+            → "Läs kundbriefet och skapa ett presentationsunderlag som följer vår grafiska profil. Leverera som .pptx."
         </div>
 
         <div class="prompt" style="margin-bottom: 16px;">
@@ -385,9 +391,9 @@ winget install --id GitHub.cli</div>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>verksamhetsdata.csv</code> med realistisk data för vårt företag. Sex månader, med kolumner som passar vår typ av verksamhet (t.ex. intäkter, kunder, projekt, timmar, kostnader). Basera allt på vad vi gör enligt CLAUDE.md. Lägg in några mönster: något som går bra, något som behöver uppmärksamhet, och en förändring över tid."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender och leverera en tydlig sammanfattning med konkreta rekommendationer."<br><br>
+            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender och leverera en tydlig sammanfattning som en <code>.html</code>-sida med diagram och visualiseringar."<br><br>
             <strong>Steg 3: Testa</strong><br>
-            → "Analysera vår verksamhetsdata. Vad går bra? Vad behöver uppmärksamhet? Vad bör vi göra annorlunda?"
+            → "Analysera vår verksamhetsdata. Vad går bra? Vad behöver uppmärksamhet? Vad bör vi göra annorlunda? Visa resultatet som en interaktiv HTML-dashboard."
         </div>
 
         <div class="prompt">
@@ -396,7 +402,7 @@ winget install --id GitHub.cli</div>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>kundarenden.txt</code> med fem realistiska kundärenden till vårt företag. Blanda: en offertförfrågan, ett klagomål, en uppföljning efter möte, en enkel fråga och en partnerförfrågan. Skriv dem som riktiga mejl med avsändare, ämnesrad och brödtext. Basera allt på vår verksamhet i CLAUDE.md."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt."<br><br>
+            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt. Leverera varje svar som ren text redo att klistras in i ett mejl."<br><br>
             <strong>Steg 3: Testa</strong><br>
             → "Läs kundärendena och skriv förslag på svar till alla fem. Prioritera det mest brådskande först."
         </div>
