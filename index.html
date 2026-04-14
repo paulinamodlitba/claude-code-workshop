@@ -340,12 +340,15 @@ winget install --id GitHub.cli</div>
     <div class="exercise">
         <h3>2. Bygg ditt workspace – projektmapp med kontext</h3>
         <span class="level level-intro">Block 3 · Steg 1</span>
-        <p>Precis som i videon börjar vi med att skapa en projektmapp och fylla den med kontextfiler som beskriver ditt arbete. Sedan ber vi Claude läsa allt och skapa en CLAUDE.md.</p>
+        <p>Vi börjar med att skapa en projektmapp och fylla den med filer som beskriver ditt arbete. Sedan ber vi Claude läsa allt och skapa en CLAUDE.md – projektets "minne".</p>
         <div class="prompt">
-            <strong>Förbered (innan du startar Claude Code):</strong><br>
+            <strong>Skapa en mapp och starta Claude Code:</strong><br>
             → Skapa en mapp, t.ex. "mitt-team" eller "mitt-projekt"<br>
-            → Lägg in 1–3 filer som beskriver ditt arbete: en projektbeskrivning, en kundbrief, en tonalitetsguide, din roll – vad som helst som ger kontext<br><br>
-            <strong>Starta Claude Code i mappen och säg:</strong><br>
+            → Starta Claude Code i mappen<br><br>
+            <strong>Be Claude skapa kontextfiler åt dig:</strong><br>
+            → "Gå till [din hemsida/ditt företags hemsida] och skapa en fil som beskriver företaget, vår tonalitet och vad vi gör."<br>
+            → Eller beskriv med egna ord: "Jag jobbar som [roll] på [företag]. Vi gör [beskriv]. Skapa en projektbeskrivning, en tonalitetsguide och en rollbeskrivning som separata filer."<br><br>
+            <strong>Låt Claude bygga CLAUDE.md:</strong><br>
             → "Läs alla filer i den här mappen. Skapa sedan en CLAUDE.md som sammanfattar projektet, min roll och hur du ska jobba med mig. Svara alltid på svenska."<br><br>
             <strong>Testa att det fungerar:</strong><br>
             → Stäng Claude Code (Ctrl+C), starta igen med <code>claude</code><br>
@@ -354,18 +357,32 @@ winget install --id GitHub.cli</div>
     </div>
 
     <div class="exercise">
-        <h3>3. Skapa din första agent</h3>
+        <h3>3. Skapa din första agent – välj ett spår</h3>
         <span class="level level-medium">Block 3 · Steg 2</span>
-        <p>En agent är en specialist som du skapar för en specifik uppgift. Vi skapar en agent som kan göra research, skriva innehåll eller analysera data – baserat på vad du faktiskt behöver.</p>
+        <p>Nu bygger vi en agent – en specialist som löser en riktig uppgift åt ditt företag. Ladda ner demodata för det spår du väljer och lägg filen i din projektmapp.</p>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Spår A: Presentationsbyggaren</strong>
+            <a href="data/spar-a-kundbrief.md" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
+            En kund har skickat en brief och du har ett möte på fredag. Du behöver ett presentationsunderlag – snabbt.<br><br>
+            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag med struktur, talarpunkter och designförslag – i linje med vår varumärkesröst i CLAUDE.md."<br>
+            → Testa: "Läs kundbriefet från Grönbergs Fastigheter och skapa ett presentationsunderlag. Max 12 slides."
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Spår B: Dataanalytikern</strong>
+            <a href="data/spar-b-forsaljningsdata.csv" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
+            Du har ett halvårs försäljningsdata och vill förstå vad som faktiskt händer – utan att bygga pivottabeller i Excel.<br><br>
+            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender, och leverera en tydlig sammanfattning med konkreta rekommendationer."<br>
+            → Testa: "Analysera vår försäljningsdata. Vilka produkter växer? Vilka krymper? Vad bör vi göra annorlunda?"
+        </div>
+
         <div class="prompt">
-            <strong>Skapa en agent:</strong><br>
-            → "Skapa en agent som heter innehållsstrateg. Den ska kunna göra webbsökningar, sammanfatta research och skriva utkast baserat på vår varumärkesröst i CLAUDE.md."<br><br>
-            <strong>Alternativa agenter du kan skapa:</strong><br>
-            → En presentationsspecialist: "Skapa en agent som tar research-dokument och omvandlar dem till presentationsunderlag"<br>
-            → En kundkommunikatör: "Skapa en agent som skriver kundmejl, svar och rapporter i vår ton"<br>
-            → En webbsidebyggare: "Skapa en agent som bygger webbsidor baserat på vårt varumärke"<br><br>
-            <strong>Testa agenten:</strong><br>
-            → "Be innehållsstrategen göra research om [ett ämne som är relevant för ditt arbete]"
+            <strong>Spår C: Kundkommunikatören</strong>
+            <a href="data/spar-c-kundarenden.md" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
+            Du har fem kundärenden i inkorgen – allt från en offertförfrågan till en missnöjd kund. Du behöver proffsiga svar, snabbt.<br><br>
+            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton – aldrig för formellt, aldrig för slarvigt."<br>
+            → Testa: "Läs kundärendena och skriv förslag på svar till alla fem. Prioritera det mest brådskande först."
         </div>
     </div>
 

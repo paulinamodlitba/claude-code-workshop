@@ -1,0 +1,43 @@
+Månad,Produkt,Kategori,Antal sålda,Intäkt (SEK),Kostnad (SEK),Kanal,Region
+2025-01,Baspaket,Tjänst,34,170000,85000,Webb,Stockholm
+2025-01,Premiumpaket,Tjänst,12,180000,72000,Webb,Stockholm
+2025-01,Baspaket,Tjänst,28,140000,70000,Webb,Göteborg
+2025-01,Premiumpaket,Tjänst,8,120000,48000,Webb,Göteborg
+2025-01,Konsulttimme,Tillägg,145,217500,101500,Telefon,Stockholm
+2025-01,Konsulttimme,Tillägg,89,133500,62300,Telefon,Göteborg
+2025-01,Onlinekurs,Digital,67,100500,13400,Webb,Hela Sverige
+2025-02,Baspaket,Tjänst,41,205000,102500,Webb,Stockholm
+2025-02,Premiumpaket,Tjänst,15,225000,90000,Webb,Stockholm
+2025-02,Baspaket,Tjänst,25,125000,62500,Webb,Göteborg
+2025-02,Premiumpaket,Tjänst,6,90000,36000,Webb,Göteborg
+2025-02,Konsulttimme,Tillägg,162,243000,113400,Telefon,Stockholm
+2025-02,Konsulttimme,Tillägg,78,117000,54600,Telefon,Göteborg
+2025-02,Onlinekurs,Digital,83,124500,16600,Webb,Hela Sverige
+2025-03,Baspaket,Tjänst,38,190000,95000,Webb,Stockholm
+2025-03,Premiumpaket,Tjänst,19,285000,114000,Webb,Stockholm
+2025-03,Baspaket,Tjänst,31,155000,77500,Webb,Göteborg
+2025-03,Premiumpaket,Tjänst,11,165000,66000,Webb,Göteborg
+2025-03,Konsulttimme,Tillägg,178,267000,124600,Telefon,Stockholm
+2025-03,Konsulttimme,Tillägg,95,142500,66500,Telefon,Göteborg
+2025-03,Onlinekurs,Digital,104,156000,20800,Webb,Hela Sverige
+2025-04,Baspaket,Tjänst,29,145000,72500,Webb,Stockholm
+2025-04,Premiumpaket,Tjänst,14,210000,84000,Webb,Stockholm
+2025-04,Baspaket,Tjänst,22,110000,55000,Webb,Göteborg
+2025-04,Premiumpaket,Tjänst,7,105000,42000,Webb,Göteborg
+2025-04,Konsulttimme,Tillägg,131,196500,91700,Telefon,Stockholm
+2025-04,Konsulttimme,Tillägg,72,108000,50400,Telefon,Göteborg
+2025-04,Onlinekurs,Digital,56,84000,11200,Webb,Hela Sverige
+2025-05,Baspaket,Tjänst,45,225000,112500,Webb,Stockholm
+2025-05,Premiumpaket,Tjänst,21,315000,126000,Webb,Stockholm
+2025-05,Baspaket,Tjänst,33,165000,82500,Webb,Göteborg
+2025-05,Premiumpaket,Tjänst,13,195000,78000,Webb,Göteborg
+2025-05,Konsulttimme,Tillägg,189,283500,132300,Telefon,Stockholm
+2025-05,Konsulttimme,Tillägg,102,153000,71400,Telefon,Göteborg
+2025-05,Onlinekurs,Digital,118,177000,23600,Webb,Hela Sverige
+2025-06,Baspaket,Tjänst,22,110000,55000,Webb,Stockholm
+2025-06,Premiumpaket,Tjänst,9,135000,54000,Webb,Stockholm
+2025-06,Baspaket,Tjänst,18,90000,45000,Webb,Göteborg
+2025-06,Premiumpaket,Tjänst,5,75000,30000,Webb,Göteborg
+2025-06,Konsulttimme,Tillägg,98,147000,68600,Telefon,Stockholm
+2025-06,Konsulttimme,Tillägg,61,91500,42700,Telefon,Göteborg
+2025-06,Onlinekurs,Digital,71,106500,14200,Webb,Hela Sverige
