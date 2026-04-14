@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kom igång med Claude Code – Workshop 24 april</title>
+    <title>Kom igång med Claude Code · Workshop 24 april</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; color: #411B38; background: #FFF6F0; }
@@ -25,8 +25,8 @@
         .card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; color: #411B38; }
         .card p, .card li { font-size: 17px; line-height: 1.6; color: #411B38; }
         .card ul { list-style: none; padding: 0; }
-        .card li { padding: 8px 0; display: flex; align-items: flex-start; }
-        .card li:before { content: "•"; font-size: 20px; margin-right: 12px; color: #C87C5C; font-weight: 600; flex-shrink: 0; }
+        .card li { padding: 10px 0; padding-left: 24px; position: relative; }
+        .card li:before { content: "•"; font-size: 20px; color: #C87C5C; font-weight: 600; position: absolute; left: 0; top: 10px; }
 
         /* ── CTA box ── */
         .cta-box { text-align: center; padding: 60px 22px; background: linear-gradient(135deg, #411B38 0%, #5A2E48 100%); border-radius: 18px; margin: 40px 0; }
@@ -127,40 +127,19 @@
 <!-- ════════════════════════════════════════════ VAD ÄR CLAUDE CODE ════════════════════════════════════════════ -->
 <div class="section">
     <h2 class="section-title">Vad är Claude Code?</h2>
-    <p class="section-subtitle">De flesta har använt AI som en avancerad sökmotor. Du ställer en fråga, du får ett svar. Claude Code är något annat. Det är mer som att ha en kollega som faktiskt jobbar i dina filer – inte bara pratar om dem.</p>
-
-    <div class="comparison">
-        <div class="compare-card old">
-            <h4>Vanlig AI-chatt</h4>
-            <p>Du skriver en fråga och får ett svar tillbaka. Du kopierar, klistrar in, justerar. AI:n ser aldrig dina filer.</p>
-        </div>
-        <div class="compare-card new">
-            <h4>Claude Code</h4>
-            <p>Claude ser dina mappar och filer direkt. Den kan skapa, redigera och organisera – precis som en kollega vid datorn bredvid dig.</p>
-        </div>
-    </div>
 
     <div class="card">
-        <h3>Varför Claude Code?</h3>
-        <ul>
-            <li>Arbetar direkt med mappar och filer på din dator – inget copy-paste</li>
-            <li>Kan skapa hela projekt med mappstrukturer, dokument och webbsidor</li>
-            <li>Kommer ihåg projektinstruktioner via en enkel textfil (CLAUDE.md)</li>
-            <li>Kan publicera ditt arbete online via GitHub</li>
-            <li>Kan lära sig nya beteenden via "skills" – dina egna instruktioner</li>
-            <li>Gratis att prova – du får ett visst antal förfrågningar utan kostnad</li>
-        </ul>
-    </div>
-
-    <div class="note">
-        <strong>Tänk på det så här:</strong> Vanlig AI är som att maila en konsult och vänta på svar. Claude Code är som att ha konsulten sittande bredvid dig vid datorn, redo att faktiskt göra jobbet.
+        <p>De flesta har använt AI som en avancerad sökmotor. Du ställer en fråga, får ett svar, kopierar det, klistrar in det någonstans och justerar. AI:n ser aldrig dina filer, dina mappar eller ditt faktiska arbete.</p>
+        <p style="margin-top: 16px;">Claude Code fungerar annorlunda. Det lever på din dator. Det kan se dina filer, läsa dina mappar, söka igenom dina dokument och faktiskt göra saker. Skapa filer, bygga webbsidor, analysera data, skriva presentationer. Riktiga filer som du kan öppna, mejla vidare och jobba vidare med.</p>
+        <p style="margin-top: 16px;">Tänk på det som skillnaden mellan att maila en konsult en fråga och vänta på svar, och att ha konsulten sittande bredvid dig vid datorn, med tillgång till alla dina filer, redo att faktiskt göra jobbet.</p>
+        <p style="margin-top: 16px;">Det bästa? Du behöver inte kunna programmera. Du ger instruktioner på vanlig svenska, en ordentlig briefing precis som du skulle ge en ny kollega. Ju mer kontext du ger, desto bättre blir resultatet. Under den här workshopen bygger du ett riktigt projekt, publicerar det live på internet och skapar din egen AI-assistent utan att skriva en enda rad kod.</p>
     </div>
 </div>
 
 <!-- ════════════════════════════════════════════ INSTALLATION ════════════════════════════════════════════ -->
 <div class="section" id="installation">
     <h2 class="section-title">Installation</h2>
-    <p class="section-subtitle">Steg för steg – du behöver inte ha gjort detta innan workshopen, men vill du förbereda dig finns allt här.</p>
+    <p class="section-subtitle">Steg för steg. Du behöver inte ha gjort detta innan workshopen, men vill du förbereda dig finns allt här.</p>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="showTab('mac')">Mac</button>
@@ -270,15 +249,15 @@ claude</div>
 <!-- ════════════════════════════════════════════ GITHUB ════════════════════════════════════════════ -->
 <div class="section" id="github">
     <h2 class="section-title">Vad är GitHub och varför behövs det?</h2>
-    <p class="section-subtitle">GitHub är som en molnlagring för projekt – men med superkrafter. Det håller koll på varje ändring, låter dig publicera webbsidor gratis, och gör det enkelt att dela ditt arbete.</p>
+    <p class="section-subtitle">GitHub är som en molnlagring för projekt, men med superkrafter. Det håller koll på varje ändring, låter dig publicera webbsidor gratis och gör det enkelt att dela ditt arbete.</p>
 
     <div class="card">
         <h3>Du behöver GitHub för att...</h3>
         <ul>
-            <li><strong>Spara ditt arbete säkert</strong> – allt lagras online som en backup</li>
-            <li><strong>Se vad som ändrats</strong> – varje ändring sparas med tidsstämpel, som "spåra ändringar" i Word</li>
-            <li><strong>Publicera webbsidor</strong> – sidor du skapar med Claude Code kan publiceras live gratis</li>
-            <li><strong>Samarbeta</strong> – andra kan se och bidra till ditt projekt</li>
+            <li>Spara ditt arbete säkert, med allt lagrat online som en backup</li>
+            <li>Se vad som ändrats. Varje ändring sparas med tidsstämpel, som "spåra ändringar" i Word</li>
+            <li>Publicera webbsidor. Sidor du skapar med Claude Code kan publiceras live gratis</li>
+            <li>Samarbeta. Andra kan se och bidra till ditt projekt</li>
         </ul>
     </div>
 
@@ -323,10 +302,10 @@ winget install --id GitHub.cli</div>
 <!-- ════════════════════════════════════════════ ÖVNINGAR ════════════════════════════════════════════ -->
 <div class="section" id="ovningar">
     <h2 class="section-title">Övningar</h2>
-    <p class="section-subtitle">Konkreta saker vi gör under workshopen – från enkla till mer avancerade</p>
+    <p class="section-subtitle">Konkreta saker vi gör under workshopen, från enkla till mer avancerade</p>
 
     <div class="exercise">
-        <h3>1. Hej Claude – din första konversation</h3>
+        <h3>1. Hej Claude, din första konversation</h3>
         <span class="level level-intro">Block 2 · Intro</span>
         <p>Starta Claude Code i en tom mapp och be den presentera sig. Utforska vad den kan se och göra.</p>
         <div class="prompt">
@@ -338,58 +317,95 @@ winget install --id GitHub.cli</div>
     </div>
 
     <div class="exercise">
-        <h3>2. Bygg ditt workspace – projektmapp med kontext</h3>
+        <h3>2. Bygg ditt workspace</h3>
         <span class="level level-intro">Block 3 · Steg 1</span>
-        <p>Vi börjar med att skapa en projektmapp och fylla den med filer som beskriver ditt arbete. Sedan ber vi Claude läsa allt och skapa en CLAUDE.md – projektets "minne".</p>
+        <p>Vi skapar en projektmapp för ett litet fiktivt företag och låter Claude fylla den med allt som behövs: företagsbeskrivning, tonalitet, visuell identitet och rollbeskrivning. Sedan bygger Claude en CLAUDE.md, projektets "minne". Välj ett av alternativen nedan.</p>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Först: Skapa en mapp och starta Claude Code</strong><br>
+            → Skapa en mapp, t.ex. "mitt-foretag"<br>
+            → Starta Claude Code i mappen
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Alt A: Utgå från en riktig hemsida</strong><br>
+            Har du ett eget företag eller en favorit? Peka Claude till hemsidan så skapar den allt.<br><br>
+            → "Gå till [hemsida, t.ex. www.mittforetag.se] och analysera företaget. Skapa sedan följande filer i mappen:<br>
+            &nbsp;&nbsp;1. <code>om-foretaget.md</code> med en kort beskrivning av vad företaget gör, vilka kunderna är och vad som gör det unikt<br>
+            &nbsp;&nbsp;2. <code>tonalitet.md</code> med en guide för hur företaget kommunicerar: vilken ton, vilka ord som passar, vad man undviker<br>
+            &nbsp;&nbsp;3. <code>visuell-identitet.md</code> med färger, typsnitt och designkänsla baserat på hemsidan<br>
+            &nbsp;&nbsp;4. <code>min-roll.md</code> där jag är [välj: VD / marknadschef / grundare] och beskriv vad jag behöver hjälp med i vardagen<br>
+            Skriv allt på svenska."
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Alt B: Hitta på ett företag från scratch</strong><br>
+            Inget företag i åtanke? Beskriv ett fiktivt och låt Claude bygga allt.<br><br>
+            → "Jag vill skapa ett workspace för ett fiktivt litet företag. Hitta på ett trovärdigt svenskt företag med 5-15 anställda. Välj själv bransch och namn. Skapa sedan följande filer i mappen:<br>
+            &nbsp;&nbsp;1. <code>om-foretaget.md</code> med namn, bransch, vad de gör, vilka kunderna är och vad som gör dem speciella<br>
+            &nbsp;&nbsp;2. <code>tonalitet.md</code> med en kommunikationsguide: hur företaget pratar, vilken ton, vilka ord, vad man undviker<br>
+            &nbsp;&nbsp;3. <code>visuell-identitet.md</code> med färgpalett (ange hex-koder), typsnitt och övergripande designkänsla<br>
+            &nbsp;&nbsp;4. <code>min-roll.md</code> där jag är grundare och VD, med en beskrivning av vad jag gör i vardagen och vad jag behöver hjälp med<br>
+            Gör det realistiskt och konkret. Skriv allt på svenska."
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Sedan: Låt Claude bygga CLAUDE.md</strong><br>
+            → "Läs alla filer i den här mappen. Skapa sedan en CLAUDE.md som sammanfattar företaget, min roll, vår tonalitet och visuella identitet. Alla svar ska vara på svenska."
+        </div>
+
         <div class="prompt">
-            <strong>Skapa en mapp och starta Claude Code:</strong><br>
-            → Skapa en mapp, t.ex. "mitt-team" eller "mitt-projekt"<br>
-            → Starta Claude Code i mappen<br><br>
-            <strong>Be Claude skapa kontextfiler åt dig:</strong><br>
-            → "Gå till [din hemsida/ditt företags hemsida] och skapa en fil som beskriver företaget, vår tonalitet och vad vi gör."<br>
-            → Eller beskriv med egna ord: "Jag jobbar som [roll] på [företag]. Vi gör [beskriv]. Skapa en projektbeskrivning, en tonalitetsguide och en rollbeskrivning som separata filer."<br><br>
-            <strong>Låt Claude bygga CLAUDE.md:</strong><br>
-            → "Läs alla filer i den här mappen. Skapa sedan en CLAUDE.md som sammanfattar projektet, min roll och hur du ska jobba med mig. Svara alltid på svenska."<br><br>
-            <strong>Testa att det fungerar:</strong><br>
+            <strong>Testa att det fungerar</strong><br>
             → Stäng Claude Code (Ctrl+C), starta igen med <code>claude</code><br>
-            → "Vad vet du om det här projektet?" – Claude ska svara baserat på CLAUDE.md
+            → "Vad vet du om det här företaget?"<br>
+            → "Skriv ett kort mejl till en ny kund, i vår ton."<br>
+            (Claude ska nu svara baserat på CLAUDE.md och alla filer i mappen)
         </div>
     </div>
 
     <div class="exercise">
-        <h3>3. Skapa din första agent – välj ett spår</h3>
+        <h3>3. Skapa din första agent</h3>
         <span class="level level-medium">Block 3 · Steg 2</span>
-        <p>Nu bygger vi en agent – en specialist som löser en riktig uppgift åt ditt företag. Ladda ner demodata för det spår du väljer och lägg filen i din projektmapp.</p>
+        <p>Nu bygger vi en agent: en specialist som löser en riktig uppgift åt ditt företag. Först ber vi Claude generera fiktiv data som passar just ditt företag, sedan skapar vi en agent som jobbar med den. Välj ett spår.</p>
 
         <div class="prompt" style="margin-bottom: 16px;">
-            <strong>Spår A: Presentationsbyggaren</strong>
-            <a href="data/spar-a-kundbrief.md" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
-            En kund har skickat en brief och du har ett möte på fredag. Du behöver ett presentationsunderlag – snabbt.<br><br>
-            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag med struktur, talarpunkter och designförslag – i linje med vår varumärkesröst i CLAUDE.md."<br>
-            → Testa: "Läs kundbriefet från Grönbergs Fastigheter och skapa ett presentationsunderlag. Max 12 slides."
+            <strong>Spår A: Presentationsbyggaren</strong><br>
+            En potentiell kund har hört av sig och du har ett möte på fredag. Du behöver ett presentationsunderlag, snabbt.<br><br>
+            <strong>Steg 1: Generera data</strong><br>
+            → "Skapa en fil som heter <code>kundbrief.txt</code>. Hitta på en trovärdig potentiell kund till vårt företag som vill ha hjälp med något vi erbjuder. Skriv briefen från kundens perspektiv: vad de behöver, vilken målgrupp de har, vad presentationen ska användas till och vilken ton de vill ha. Gör det realistiskt baserat på vår verksamhet i CLAUDE.md."<br><br>
+            <strong>Steg 2: Skapa agenten</strong><br>
+            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag med struktur, talarpunkter och designförslag, i linje med vår varumärkesröst i CLAUDE.md."<br><br>
+            <strong>Steg 3: Testa</strong><br>
+            → "Läs kundbriefet och skapa ett presentationsunderlag som följer vår grafiska profil."
         </div>
 
         <div class="prompt" style="margin-bottom: 16px;">
-            <strong>Spår B: Dataanalytikern</strong>
-            <a href="data/spar-b-forsaljningsdata.csv" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
-            Du har ett halvårs försäljningsdata och vill förstå vad som faktiskt händer – utan att bygga pivottabeller i Excel.<br><br>
-            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender, och leverera en tydlig sammanfattning med konkreta rekommendationer."<br>
-            → Testa: "Analysera vår försäljningsdata. Vilka produkter växer? Vilka krymper? Vad bör vi göra annorlunda?"
+            <strong>Spår B: Dataanalytikern</strong><br>
+            Du har försäljningsdata och vill snabbt förstå vad som går bra och vad som inte gör det.<br><br>
+            <strong>Steg 1: Generera data</strong><br>
+            → "Skapa en fil som heter <code>verksamhetsdata.csv</code> med realistisk data för vårt företag. Sex månader, med kolumner som passar vår typ av verksamhet (t.ex. intäkter, kunder, projekt, timmar, kostnader). Basera allt på vad vi gör enligt CLAUDE.md. Lägg in några mönster: något som går bra, något som behöver uppmärksamhet, och en förändring över tid."<br><br>
+            <strong>Steg 2: Skapa agenten</strong><br>
+            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender och leverera en tydlig sammanfattning med konkreta rekommendationer."<br><br>
+            <strong>Steg 3: Testa</strong><br>
+            → "Analysera vår verksamhetsdata. Vad går bra? Vad behöver uppmärksamhet? Vad bör vi göra annorlunda?"
         </div>
 
         <div class="prompt">
-            <strong>Spår C: Kundkommunikatören</strong>
-            <a href="data/spar-c-kundarenden.md" download style="float: right; color: #C87C5C; font-weight: 500; font-family: inherit; font-size: 14px;">Ladda ner demodata</a><br>
-            Du har fem kundärenden i inkorgen – allt från en offertförfrågan till en missnöjd kund. Du behöver proffsiga svar, snabbt.<br><br>
-            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton – aldrig för formellt, aldrig för slarvigt."<br>
-            → Testa: "Läs kundärendena och skriv förslag på svar till alla fem. Prioritera det mest brådskande först."
+            <strong>Spår C: Kundkommunikatören</strong><br>
+            Inkorgen är full och du behöver proffsiga svar, snabbt.<br><br>
+            <strong>Steg 1: Generera data</strong><br>
+            → "Skapa en fil som heter <code>kundarenden.txt</code> med fem realistiska kundärenden till vårt företag. Blanda: en offertförfrågan, ett klagomål, en uppföljning efter möte, en enkel fråga och en partnerförfrågan. Skriv dem som riktiga mejl med avsändare, ämnesrad och brödtext. Basera allt på vår verksamhet i CLAUDE.md."<br><br>
+            <strong>Steg 2: Skapa agenten</strong><br>
+            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt."<br><br>
+            <strong>Steg 3: Testa</strong><br>
+            → "Läs kundärendena och skriv förslag på svar till alla fem. Prioritera det mest brådskande först."
         </div>
     </div>
 
     <div class="exercise">
         <h3>4. Publicera live med GitHub</h3>
         <span class="level level-medium">Block 4 · Praktisk</span>
-        <p>Vi tar webbsidan du just skapade och publicerar den på internet – gratis, via GitHub Pages.</p>
+        <p>Vi tar projektet du just skapade och publicerar det på internet, gratis, via GitHub Pages.</p>
         <div class="prompt">
             <strong>Testa:</strong><br>
             → "Hjälp mig publicera den här webbsidan på GitHub Pages. Jag vill att den ska vara tillgänglig på [dittnamn].github.io"<br>
@@ -400,19 +416,66 @@ winget install --id GitHub.cli</div>
     <div class="exercise">
         <h3>5. Skapa din första skill</h3>
         <span class="level level-medium">Block 5 · Praktisk</span>
-        <p>En skill talar om för Claude hur det ska hantera en specifik situation. Vi skapar en som du faktiskt har nytta av.</p>
+        <p>En skill är en instruktion som talar om för Claude hur det ska hantera en viss typ av uppgift. Det kan handla om format och tonalitet, men också om hela arbetsflöden, analysmetoder eller kreativa processer. Du kan både använda färdiga skills som andra har byggt och skapa helt egna som passar just ditt sätt att jobba.</p>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Så fungerar det</strong><br>
+            En skill är en <code>.md</code>-fil som sparas i mappen <code>.claude/skills/</code>. Filen innehåller instruktioner som Claude följer när du anropar skillen. Du anropar den genom att skriva <code>/</code> följt av skillens namn i Claude Code. När du ber Claude skapa en skill skapar den filen åt dig automatiskt på rätt ställe.<br><br>
+            Det finns ett växande bibliotek av färdiga skills som andra har byggt och delat. Du kan installera dem direkt och börja använda, eller använda dem som inspiration för att skapa egna.
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Steg 1: Bestäm vad din skill ska göra</strong><br>
+            Tänk på något du gör ofta som alltid ska se likadant ut. Till exempel:<br>
+            → Skriva kundmejl i en viss ton och längd<br>
+            → Leverera dokument i ett fast format<br>
+            → Skriva veckorapporter med en fast mall<br>
+            → Sammanfatta möten med en specifik struktur
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Steg 2: Be Claude skapa skillen</strong><br>
+            → "Skapa en skill som heter <code>kundmejl</code>. Varje gång jag anropar den ska du skriva ett professionellt kundmejl som följer vår tonalitet i CLAUDE.md. Mejlet ska alltid ha: en personlig hälsning, en sammanfattning av ärendet i en mening, svar eller lösning i max tre meningar, och avsluta med nästa steg. Max 8 meningar totalt."<br><br>
+            Claude skapar filen <code>.claude/commands/kundmejl.md</code> åt dig automatiskt.
+        </div>
+
+        <div class="prompt" style="margin-bottom: 16px;">
+            <strong>Steg 3: Testa din skill</strong><br>
+            → Skriv <code>/kundmejl</code> i Claude Code<br>
+            → "En kund har frågat om vi kan leverera snabbare. Skriv ett svar."<br>
+            → Justera: "Gör den lite varmare i tonen" eller "Lägg till att vi erbjuder expressfrakt"
+        </div>
+
         <div class="prompt">
-            <strong>Exempel på skills du kan skapa:</strong><br>
-            → "Skapa en skill som gör att du alltid levererar dokument i formatet: sammanfattning, bakgrund, rekommendation, nästa steg"<br>
-            → "Skapa en skill för kundmejl som alltid ska vara max 5 meningar, professionella men varma"<br>
-            → "Skapa en skill som genererar veckorapporter med fast mall: highlight, utmaningar, nyckeltal, plan nästa vecka"
+            <strong>Fler idéer på skills du kan skapa</strong><br><br>
+            Format och mallar:<br>
+            → <code>/veckorapport</code> med fast mall: höjdpunkter, utmaningar, nyckeltal, plan nästa vecka<br>
+            → <code>/mötessammanfattning</code> som alltid levererar: beslut, åtgärder, ansvarig, deadline<br><br>
+            Analys och research:<br>
+            → <code>/konkurrentkoll</code> som besöker en hemsida och sammanfattar vad de erbjuder, hur de kommunicerar och vad vi kan lära oss<br>
+            → <code>/prisanalys</code> som jämför vår prissättning mot en konkurrent baserat på offentlig info<br><br>
+            Kommunikation:<br>
+            → <code>/offert</code> som skriver offertförslag baserat på vår prislista och tonalitet<br>
+            → <code>/sociala-medier</code> som skriver inlägg i rätt längd och ton för LinkedIn/Instagram<br><br>
+            Arbetsflöden:<br>
+            → <code>/ny-kund</code> som skapar en välkomstmapp med introduktionsmejl, projektplan och checklista<br>
+            → <code>/pitch</code> som tar en kort idébeskrivning och bygger ut den till en komplett pitch med struktur, argument och nästa steg
+        </div>
+
+        <div class="note">
+            <strong>Hitta färdiga skills</strong><br>
+            Det finns ett snabbväxande community som delar skills. Några bra ställen att börja:<br><br>
+            <a href="https://clskills.in" style="color: #C87C5C; font-weight: 500;">clskills.in</a> har över 700 gratis skills i 60+ kategorier, sökbart.<br>
+            <a href="https://github.com/ComposioHQ/awesome-claude-skills" style="color: #C87C5C; font-weight: 500;">Awesome Claude Skills</a> på GitHub är en kurerad lista med community-byggda skills.<br>
+            <a href="https://reddit.com/r/ClaudeAI" style="color: #C87C5C; font-weight: 500;">r/ClaudeAI på Reddit</a> delar regelbundet nya skills och samlingar (2300+ skills och växande).<br><br>
+            Claude Code har också inbyggda skills som du kan använda direkt, t.ex. <code>/simplify</code>, <code>/batch</code> och <code>/debug</code>. Skriv <code>/</code> i Claude Code för att se alla tillgängliga.
         </div>
     </div>
 
     <div class="exercise">
         <h3>6. Avancerat: Claude som arbetspartner</h3>
         <span class="level level-advanced">Block 5 · Fördjupning</span>
-        <p>Ge Claude ett mer komplext uppdrag och jobba iterativt – precis som med en riktig kollega.</p>
+        <p>Ge Claude ett mer komplext uppdrag och jobba iterativt, precis som med en riktig kollega.</p>
         <div class="prompt">
             <strong>Testa:</strong><br>
             → "Jag ska hålla en presentation om [ämne] nästa vecka. Hjälp mig ta fram en struktur, skapa slides-underlag och en talarmanus-outline."<br>
@@ -425,12 +488,20 @@ winget install --id GitHub.cli</div>
 <!-- ════════════════════════════════════════════ ORDLISTA ════════════════════════════════════════════ -->
 <div class="section" id="ordlista">
     <h2 class="section-title">Ordlista</h2>
-    <p class="section-subtitle">Alla begrepp du behöver – förklarat utan krångel</p>
+    <p class="section-subtitle">Alla begrepp du behöver, förklarat utan krångel</p>
+
+    <div class="card" style="margin-bottom: 40px;">
+        <h3>Videoguide: de viktigaste begreppen</h3>
+        <p style="margin-bottom: 20px;">Den här videon går igenom de viktigaste begreppen kopplade till Claude Code på ett pedagogiskt sätt. Bra att titta på före eller efter workshopen om du vill fördjupa dig.</p>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px;">
+            <iframe src="https://www.youtube.com/embed/ZlDnsf_DOzg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+        </div>
+    </div>
 
     <dl>
         <div class="glossary-term">
             <dt>Claude Code</dt>
-            <dd>Ett AI-verktyg som körs i terminalen (eller som app) och kan läsa, skapa och redigera filer på din dator. Till skillnad från vanlig AI-chatt kan Claude Code faktiskt <em>göra</em> saker – inte bara svara på frågor.</dd>
+            <dd>Ett AI-verktyg som körs i terminalen (eller som app) och kan läsa, skapa och redigera filer på din dator. Till skillnad från vanlig AI-chatt kan Claude Code faktiskt <em>göra</em> saker, inte bara svara på frågor.</dd>
         </div>
 
         <div class="glossary-term">
@@ -440,12 +511,12 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt><code>CLAUDE.md</code></dt>
-            <dd>En textfil som Claude läser automatiskt varje gång du startar ett projekt. Det är Claude Codes "minne" – här skriver du instruktioner, projektbeskrivning och regler. Tänk på den som en briefing till en ny kollega.</dd>
+            <dd>En textfil som Claude läser automatiskt varje gång du startar ett projekt. Det är Claude Codes "minne". Här skriver du instruktioner, projektbeskrivning och regler. Tänk på den som en briefing till en ny kollega.</dd>
         </div>
 
         <div class="glossary-term">
             <dt>Markdown (.md)</dt>
-            <dd>Ett enkelt sätt att formatera text med symboler: <code># Rubrik</code>, <code>**fetstil**</code>, <code>- punktlista</code>. Filändelsen <code>.md</code> betyder bara att filen använder denna formatering – men det är fortfarande en helt vanlig textfil som du kan öppna och redigera var som helst. CLAUDE.md, skills och andra instruktionsfiler använder markdown.</dd>
+            <dd>Ett enkelt sätt att formatera text med symboler: <code># Rubrik</code>, <code>**fetstil**</code>, <code>- punktlista</code>. Filändelsen <code>.md</code> betyder bara att filen använder denna formatering, men det är fortfarande en helt vanlig textfil som du kan öppna och redigera var som helst. CLAUDE.md, skills och andra instruktionsfiler använder markdown.</dd>
         </div>
 
         <div class="glossary-term">
@@ -480,7 +551,7 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Commit</dt>
-            <dd>En sparad version av ditt projekt. Varje commit är som en "checkpoint" – du kan alltid gå tillbaka. Tänk: Ctrl+S, men med en beskrivning av vad du ändrade.</dd>
+            <dd>En sparad version av ditt projekt. Varje commit är som en "checkpoint" och du kan alltid gå tillbaka. Tänk Ctrl+S, men med en beskrivning av vad du ändrade.</dd>
         </div>
 
         <div class="glossary-term">
@@ -515,12 +586,12 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Context window (kontextfönster)</dt>
-            <dd>Claudes "arbetsminne" – hur mycket information den kan ha i huvudet samtidigt. Tänk: ett skrivbord med begränsad yta. Ju längre konversation och ju fler filer, desto fullare blir skrivbordet. När det blir fullt börjar Claude sammanfatta och glömma äldre delar.</dd>
+            <dd>Claudes "arbetsminne", alltså hur mycket information den kan ha i huvudet samtidigt. Tänk på det som ett skrivbord med begränsad yta. Ju längre konversation och ju fler filer, desto fullare blir skrivbordet. När det blir fullt börjar Claude sammanfatta och glömma äldre delar.</dd>
         </div>
 
         <div class="glossary-term">
             <dt><code>/compact</code></dt>
-            <dd>Ett kommando som sammanfattar hela konversationen till en kortare version. Använd det när Claude börjar "glömma" saker du sagt tidigare – det frigör plats i kontextfönstret utan att du behöver börja om.</dd>
+            <dd>Ett kommando som sammanfattar hela konversationen till en kortare version. Använd det när Claude börjar "glömma" saker du sagt tidigare. Det frigör plats i kontextfönstret utan att du behöver börja om.</dd>
         </div>
 
         <div class="glossary-term">
@@ -530,17 +601,17 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Plan Mode</dt>
-            <dd>Ett läge där Claude visar sin plan innan den gör något. Istället för att direkt skapa filer säger den: "Jag tänker göra X, Y och Z – okej?" Du godkänner eller justerar innan något händer. Bra för att behålla kontrollen.</dd>
+            <dd>Ett läge där Claude visar sin plan innan den gör något. Istället för att direkt skapa filer säger den: "Jag tänker göra X, Y och Z, okej?" Du godkänner eller justerar innan något händer. Bra för att behålla kontrollen.</dd>
         </div>
 
         <div class="glossary-term">
             <dt>Modellval (Opus / Sonnet / Haiku)</dt>
-            <dd>Claude Code kan använda olika AI-modeller: <strong>Opus</strong> (smartast, dyrast – för komplexa uppgifter), <strong>Sonnet</strong> (balanserad – bra för vardagsarbete), <strong>Haiku</strong> (snabbast, billigast – för enkla frågor). Du kan byta under samtalets gång.</dd>
+            <dd>Claude Code kan använda olika AI-modeller: <strong>Opus</strong> (smartast, dyrast, för komplexa uppgifter), <strong>Sonnet</strong> (balanserad, bra för vardagsarbete), <strong>Haiku</strong> (snabbast, billigast, för enkla frågor). Du kan byta under samtalets gång.</dd>
         </div>
 
         <div class="glossary-term">
             <dt>Interrupt (Escape)</dt>
-            <dd>Tryck <code>Escape</code> för att avbryta Claude mitt i en uppgift. Användbart om du ser att den är på väg åt fel håll. Inget arbete går förlorat – du kan ge nya instruktioner direkt.</dd>
+            <dd>Tryck <code>Escape</code> för att avbryta Claude mitt i en uppgift. Användbart om du ser att den är på väg åt fel håll. Inget arbete går förlorat och du kan ge nya instruktioner direkt.</dd>
         </div>
 
         <div class="glossary-term">
@@ -560,17 +631,17 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Minne (Auto-memory)</dt>
-            <dd>En automatisk funktion som sparar dina preferenser och arbetsmönster över tid – <em>mellan</em> sessioner. Skiljer sig från CLAUDE.md: minnet byggs upp automatiskt av Claude själv, medan CLAUDE.md är instruktioner du skriver manuellt.</dd>
+            <dd>En automatisk funktion som sparar dina preferenser och arbetsmönster över tid, <em>mellan</em> sessioner. Skiljer sig från CLAUDE.md: minnet byggs upp automatiskt av Claude själv, medan CLAUDE.md är instruktioner du skriver manuellt.</dd>
         </div>
 
         <div class="glossary-term">
             <dt>Multimodalt stöd</dt>
-            <dd>Claude kan "se" bilder. Du kan klistra in screenshots, foton av whiteboards, eller designskisser – och Claude förstår vad som visas. Användbart för att t.ex. bygga en webbsida utifrån en skiss.</dd>
+            <dd>Claude kan "se" bilder. Du kan klistra in screenshots, foton av whiteboards eller designskisser, och Claude förstår vad som visas. Användbart för att t.ex. bygga en webbsida utifrån en skiss.</dd>
         </div>
 
         <div class="glossary-term">
             <dt>Verktyg (Tools)</dt>
-            <dd>Inbyggda funktioner som Claude automatiskt väljer för att utföra uppgifter: läsa filer, skriva filer, köra kommandon, söka i kodbasen. Du behöver inte veta vilka verktyg som finns – Claude väljer rätt verktyg åt dig.</dd>
+            <dd>Inbyggda funktioner som Claude automatiskt väljer för att utföra uppgifter: läsa filer, skriva filer, köra kommandon, söka i kodbasen. Du behöver inte veta vilka verktyg som finns. Claude väljer rätt verktyg åt dig.</dd>
         </div>
 
         <div class="glossary-term">
@@ -587,21 +658,21 @@ winget install --id GitHub.cli</div>
     <div class="card">
         <h3>Gör så här</h3>
         <ul>
-            <li><strong>Var specifik.</strong> "Skapa en snygg webbsida" → "Skapa en webbsida med mitt namn, en kort bio på 3 meningar, ljus bakgrund och grön accentfärg"</li>
-            <li><strong>Iterera.</strong> Du behöver inte få allt rätt första gången. Säg "ändra rubriken", "gör texten kortare", "byt färg"</li>
-            <li><strong>Läs vad Claude föreslår</strong> innan du godkänner. Du har alltid sista ordet</li>
-            <li><strong>Använd CLAUDE.md.</strong> Allt som Claude ska veta varje gång skriver du där</li>
-            <li><strong>Spara ofta med commits.</strong> Tänk: regelbundna checkpoints</li>
+            <li>Var specifik. "Skapa en snygg webbsida" → "Skapa en webbsida med mitt namn, en kort bio på 3 meningar, ljus bakgrund och grön accentfärg"</li>
+            <li>Iterera. Du behöver inte få allt rätt första gången. Säg "ändra rubriken", "gör texten kortare", "byt färg"</li>
+            <li>Läs vad Claude föreslår innan du godkänner. Du har alltid sista ordet</li>
+            <li>Använd CLAUDE.md. Allt som Claude ska veta varje gång skriver du där</li>
+            <li>Spara ofta med commits. Tänk: regelbundna checkpoints</li>
         </ul>
     </div>
 
     <div class="card">
         <h3>Undvik det här</h3>
         <ul>
-            <li><strong>Ladda inte upp känsliga filer</strong> (lönelistor, personnummer, kunddata) utan att först anonymisera</li>
-            <li><strong>Ge inte full behörighet</strong> förrän du förstår vad Claude Code gör</li>
-            <li><strong>Lita inte blint</strong> – granska alltid resultatet, särskilt siffror och fakta</li>
-            <li><strong>Starta inte för stort.</strong> Ett litet projekt först, sedan bygger du vidare</li>
+            <li>Ladda inte upp känsliga filer (lönelistor, personnummer, kunddata) utan att först anonymisera</li>
+            <li>Ge inte full behörighet förrän du förstår vad Claude Code gör</li>
+            <li>Lita inte blint. Granska alltid resultatet, särskilt siffror och fakta</li>
+            <li>Starta inte för stort. Ett litet projekt först, sedan bygger du vidare</li>
         </ul>
     </div>
 
@@ -617,10 +688,10 @@ winget install --id GitHub.cli</div>
     <div class="card">
         <h3>Fortsätt lära dig</h3>
         <ul>
-            <li><a href="https://docs.anthropic.com/en/docs/claude-code/overview" style="color: #C87C5C; font-weight: 500;">Officiell Claude Code-dokumentation</a> – fullständig guide</li>
-            <li><a href="https://github.com/anthropics/claude-code" style="color: #C87C5C; font-weight: 500;">Claude Code på GitHub</a> – öppen källkod och community</li>
-            <li><a href="https://michaelcrist.substack.com/p/claude-code" style="color: #C87C5C; font-weight: 500;">The Non-Technical Person's Guide to Claude Code</a> – utmärkt genomgång</li>
-            <li><a href="https://claude.ai/download" style="color: #C87C5C; font-weight: 500;">Ladda ner Claude Code desktop-app</a> – grafiskt alternativ till terminalen</li>
+            <li><a href="https://docs.anthropic.com/en/docs/claude-code/overview" style="color: #C87C5C; font-weight: 500;">Officiell Claude Code-dokumentation</a> (fullständig guide)</li>
+            <li><a href="https://github.com/anthropics/claude-code" style="color: #C87C5C; font-weight: 500;">Claude Code på GitHub</a> (öppen källkod och community)</li>
+            <li><a href="https://michaelcrist.substack.com/p/claude-code" style="color: #C87C5C; font-weight: 500;">The Non-Technical Person's Guide to Claude Code</a> (utmärkt genomgång)</li>
+            <li><a href="https://claude.ai/download" style="color: #C87C5C; font-weight: 500;">Ladda ner Claude Code desktop-app</a> (grafiskt alternativ till terminalen)</li>
         </ul>
     </div>
 </div>
