@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kom igång med Claude Code – Workshop 24 april</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; color: #411B38; background: #FFF6F0; }
+
+        /* ── Hero ── */
+        .hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(135deg, #FFF6F0 0%, #FFE8E0 100%); }
+        .hero h1 { font-size: 56px; font-weight: 700; line-height: 1.07; letter-spacing: -0.005em; margin-bottom: 12px; color: #411B38; }
+        .hero .subtitle { font-size: 28px; line-height: 1.2; font-weight: 400; color: #7A4864; margin-bottom: 8px; }
+        .hero .date { font-size: 18px; color: #C87C5C; font-weight: 600; margin-top: 12px; }
+
+        /* ── Layout ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 22px; }
+        .section { padding: 60px 0; }
+        .section-title { font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: -0.003em; margin-bottom: 16px; text-align: center; color: #411B38; }
+        .section-subtitle { text-align: center; font-size: 18px; color: #7A4864; margin-bottom: 40px; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+
+        /* ── Cards ── */
+        .card { background: white; border-radius: 18px; padding: 48px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(65, 27, 56, 0.08); border: 1px solid rgba(65, 27, 56, 0.06); }
+        .card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; color: #411B38; }
+        .card p, .card li { font-size: 17px; line-height: 1.6; color: #411B38; }
+        .card ul { list-style: none; padding: 0; }
+        .card li { padding: 8px 0; display: flex; align-items: flex-start; }
+        .card li:before { content: "•"; font-size: 20px; margin-right: 12px; color: #C87C5C; font-weight: 600; flex-shrink: 0; }
+
+        /* ── CTA box ── */
+        .cta-box { text-align: center; padding: 60px 22px; background: linear-gradient(135deg, #411B38 0%, #5A2E48 100%); border-radius: 18px; margin: 40px 0; }
+        .cta-box h2 { font-size: 36px; font-weight: 700; margin-bottom: 14px; color: white; }
+        .cta-box p { font-size: 19px; color: #FFE8E0; margin-bottom: 28px; }
+
+        /* ── Buttons ── */
+        .btn { display: inline-block; background: #C87C5C; color: white; padding: 16px 40px; border-radius: 980px; text-decoration: none; font-size: 17px; font-weight: 500; transition: all 0.2s ease; border: none; cursor: pointer; }
+        .btn:hover { background: #D68D6C; transform: scale(1.02); }
+
+        /* ── Tabs ── */
+        .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
+        .tab-btn { background: white; border: 2px solid #411B38; padding: 12px 32px; border-radius: 980px; font-size: 17px; font-weight: 500; cursor: pointer; transition: all 0.2s ease; color: #411B38; font-family: inherit; }
+        .tab-btn.active { background: #411B38; color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ── Steps ── */
+        .steps { background: white; border-radius: 18px; padding: 48px; box-shadow: 0 4px 20px rgba(65, 27, 56, 0.08); border: 1px solid rgba(65, 27, 56, 0.06); }
+        .steps h3 { font-size: 28px; font-weight: 600; margin-bottom: 32px; color: #411B38; }
+        .step { margin-bottom: 32px; }
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(135deg, #C87C5C 0%, #D68D6C 100%); color: white; border-radius: 50%; font-weight: 600; font-size: 16px; margin-right: 16px; flex-shrink: 0; vertical-align: top; }
+        .step-content { display: inline-block; vertical-align: top; width: calc(100% - 56px); }
+        .step-title { font-size: 19px; font-weight: 600; margin-bottom: 8px; color: #411B38; }
+        .step-desc { font-size: 17px; line-height: 1.6; color: #7A4864; }
+        .step-desc a { color: #C87C5C; text-decoration: none; font-weight: 500; }
+        .step-desc a:hover { text-decoration: underline; }
+
+        /* ── Code blocks ── */
+        .code-block { background: #FFF6F0; border-radius: 12px; padding: 20px; margin-top: 12px; font-family: 'SF Mono', 'Monaco', 'Courier New', monospace; font-size: 14px; line-height: 1.6; color: #411B38; overflow-x: auto; border: 1px solid rgba(65, 27, 56, 0.1); white-space: pre-wrap; word-break: break-word; }
+
+        /* ── Note boxes ── */
+        .note { background: #FFF6F0; border-radius: 12px; padding: 24px; margin: 32px 0; font-size: 17px; line-height: 1.6; color: #411B38; border-left: 4px solid #C87C5C; }
+        .note strong { font-weight: 600; color: #411B38; }
+        .warning { border-left-color: #e6a020; }
+
+        /* ── Exercises ── */
+        .exercise { background: white; border-radius: 18px; padding: 48px; margin-bottom: 24px; box-shadow: 0 4px 20px rgba(65, 27, 56, 0.08); border: 1px solid rgba(65, 27, 56, 0.06); }
+        .exercise h3 { font-size: 24px; font-weight: 600; margin-bottom: 8px; color: #411B38; }
+        .exercise .level { display: inline-block; font-size: 13px; font-weight: 600; padding: 4px 12px; border-radius: 980px; margin-bottom: 14px; }
+        .level-intro { background: #FFE8E0; color: #7A4864; }
+        .level-medium { background: #f0e0d0; color: #5A2E48; }
+        .level-advanced { background: #411B38; color: #FFE8E0; }
+        .exercise p { font-size: 17px; line-height: 1.6; color: #7A4864; margin-bottom: 10px; }
+        .exercise .prompt { background: #FFF6F0; border-radius: 12px; padding: 20px; font-family: 'SF Mono', 'Monaco', monospace; font-size: 14px; line-height: 1.6; margin-top: 12px; border: 1px solid rgba(65, 27, 56, 0.1); }
+
+        /* ── Glossary ── */
+        .glossary-term { background: white; border-radius: 14px; padding: 24px 28px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(65, 27, 56, 0.06); border: 1px solid rgba(65, 27, 56, 0.06); }
+        .glossary-term dt { font-size: 18px; font-weight: 600; color: #411B38; margin-bottom: 4px; }
+        .glossary-term dt code { background: #FFE8E0; padding: 2px 8px; border-radius: 6px; font-size: 15px; color: #5A2E48; }
+        .glossary-term dd { font-size: 16px; line-height: 1.6; color: #7A4864; }
+
+        /* ── Schedule ── */
+        .schedule-block { background: white; border-radius: 18px; padding: 32px 36px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(65, 27, 56, 0.06); border-left: 4px solid #C87C5C; position: relative; }
+        .schedule-block .time { font-size: 14px; font-weight: 700; color: #C87C5C; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 6px; }
+        .schedule-block h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; color: #411B38; }
+        .schedule-block p { font-size: 16px; line-height: 1.6; color: #7A4864; }
+        .schedule-block.break { border-left-color: #e0d0c8; background: #FFF6F0; }
+
+        /* ── Comparison ── */
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 32px 0; }
+        .compare-card { background: white; border-radius: 18px; padding: 32px; text-align: center; }
+        .compare-card h4 { font-size: 18px; margin-bottom: 12px; color: #411B38; }
+        .compare-card p { font-size: 15px; line-height: 1.6; color: #7A4864; }
+        .compare-card.old { border: 2px solid #e0d0c8; }
+        .compare-card.new { border: 2px solid #C87C5C; }
+
+        /* ── Footer ── */
+        .footer { text-align: center; padding: 60px 22px; background: linear-gradient(135deg, #411B38 0%, #5A2E48 100%); margin-top: 60px; color: white; }
+        .footer p { font-size: 15px; line-height: 1.6; color: #FFE8E0; margin-bottom: 8px; }
+        .footer strong { color: white; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .hero .subtitle { font-size: 19px; }
+            .section-title { font-size: 28px; }
+            .card, .steps, .exercise, .schedule-block { padding: 28px 22px; }
+            .cta-box { padding: 40px 22px; }
+            .cta-box h2 { font-size: 28px; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════ HERO ════════════════════════════════════════════ -->
+<div class="hero">
+    <div class="container">
+        <h1>Kom igång med Claude Code</h1>
+        <p class="subtitle">Från nybörjare till att ha en AI-kollega som jobbar i dina filer</p>
+        <p class="date">Workshop · 24 april 2026 · 3,5 timmar</p>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- ════════════════════════════════════════════ VAD ÄR CLAUDE CODE ════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">Vad är Claude Code?</h2>
+    <p class="section-subtitle">De flesta har använt AI som en avancerad sökmotor. Du ställer en fråga, du får ett svar. Claude Code är något annat. Det är mer som att ha en kollega som faktiskt jobbar i dina filer – inte bara pratar om dem.</p>
+
+    <div class="comparison">
+        <div class="compare-card old">
+            <h4>Vanlig AI-chatt</h4>
+            <p>Du skriver en fråga och får ett svar tillbaka. Du kopierar, klistrar in, justerar. AI:n ser aldrig dina filer.</p>
+        </div>
+        <div class="compare-card new">
+            <h4>Claude Code</h4>
+            <p>Claude ser dina mappar och filer direkt. Den kan skapa, redigera och organisera – precis som en kollega vid datorn bredvid dig.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Varför Claude Code?</h3>
+        <ul>
+            <li>Arbetar direkt med mappar och filer på din dator – inget copy-paste</li>
+            <li>Kan skapa hela projekt med mappstrukturer, dokument och webbsidor</li>
+            <li>Kommer ihåg projektinstruktioner via en enkel textfil (CLAUDE.md)</li>
+            <li>Kan publicera ditt arbete online via GitHub</li>
+            <li>Kan lära sig nya beteenden via "skills" – dina egna instruktioner</li>
+            <li>Gratis att prova – du får ett visst antal förfrågningar utan kostnad</li>
+        </ul>
+    </div>
+
+    <div class="note">
+        <strong>Tänk på det så här:</strong> Vanlig AI är som att maila en konsult och vänta på svar. Claude Code är som att ha konsulten sittande bredvid dig vid datorn, redo att faktiskt göra jobbet.
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════ INSTALLATION ════════════════════════════════════════════ -->
+<div class="section" id="installation">
+    <h2 class="section-title">Installation</h2>
+    <p class="section-subtitle">Steg för steg – du behöver inte ha gjort detta innan workshopen, men vill du förbereda dig finns allt här.</p>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('mac')">Mac</button>
+        <button class="tab-btn" onclick="showTab('windows')">Windows</button>
+    </div>
+
+    <!-- ── Mac ── -->
+    <div id="mac-tab" class="tab-content active">
+        <div class="steps">
+            <h3>Installation på Mac</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <div class="step-title">Skapa ett konto hos Anthropic</div>
+                    <div class="step-desc">Gå till <a href="https://console.anthropic.com/">console.anthropic.com</a> och skapa ett konto. Du behöver verifiera med e-post.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <div class="step-title">Installera Node.js</div>
+                    <div class="step-desc">Öppna Terminal (sök efter "Terminal" i Spotlight med Cmd+Mellanslag). Klistra in:</div>
+                    <div class="code-block">node --version</div>
+                    <div class="step-desc" style="margin-top: 8px;">Ser du ett versionsnummer (t.ex. v20.x.x)? Då är du klar! Om inte, gå till <a href="https://nodejs.org/">nodejs.org</a> och ladda ner LTS-versionen. Installera som vanligt program.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <div class="step-title">Installera Claude Code</div>
+                    <div class="step-desc">I Terminal, skriv:</div>
+                    <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <div class="step-title">Starta Claude Code</div>
+                    <div class="step-desc">Skapa en mapp för ditt projekt och starta Claude Code:</div>
+                    <div class="code-block">mkdir mitt-projekt
+cd mitt-projekt
+claude</div>
+                    <div class="step-desc" style="margin-top: 8px;">Första gången öppnas en webbläsare för att logga in. Följ instruktionerna.</div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Vad är Terminal?</strong> Det är ett program som redan finns på din Mac. Istället för att klicka på ikoner skriver du kommandon. Tänk på det som att skicka textmeddelanden till din dator.
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Windows ── -->
+    <div id="windows-tab" class="tab-content">
+        <div class="steps">
+            <h3>Installation på Windows</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <div class="step-title">Skapa ett konto hos Anthropic</div>
+                    <div class="step-desc">Gå till <a href="https://console.anthropic.com/">console.anthropic.com</a> och skapa ett konto.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <div class="step-title">Installera Node.js</div>
+                    <div class="step-desc">Gå till <a href="https://nodejs.org/">nodejs.org</a> och ladda ner LTS-versionen. Installera som vanligt (klicka Next hela vägen). Öppna sedan PowerShell (sök i startmenyn) och skriv:</div>
+                    <div class="code-block">node --version</div>
+                    <div class="step-desc" style="margin-top: 8px;">Ser du ett versionsnummer? Bra, då funkar det!</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <div class="step-title">Installera Claude Code</div>
+                    <div class="step-desc">I PowerShell, skriv:</div>
+                    <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <div class="step-title">Starta Claude Code</div>
+                    <div class="step-desc">Skapa en mapp och starta:</div>
+                    <div class="code-block">mkdir mitt-projekt
+cd mitt-projekt
+claude</div>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Alternativ för Windows:</strong> Claude Code finns också som en <a href="https://claude.ai/download">desktop-app</a> om du hellre vill slippa terminalen helt. Den fungerar likadant men med ett grafiskt fönster.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════ GITHUB ════════════════════════════════════════════ -->
+<div class="section" id="github">
+    <h2 class="section-title">Vad är GitHub och varför behövs det?</h2>
+    <p class="section-subtitle">GitHub är som en molnlagring för projekt – men med superkrafter. Det håller koll på varje ändring, låter dig publicera webbsidor gratis, och gör det enkelt att dela ditt arbete.</p>
+
+    <div class="card">
+        <h3>Du behöver GitHub för att...</h3>
+        <ul>
+            <li><strong>Spara ditt arbete säkert</strong> – allt lagras online som en backup</li>
+            <li><strong>Se vad som ändrats</strong> – varje ändring sparas med tidsstämpel, som "spåra ändringar" i Word</li>
+            <li><strong>Publicera webbsidor</strong> – sidor du skapar med Claude Code kan publiceras live gratis</li>
+            <li><strong>Samarbeta</strong> – andra kan se och bidra till ditt projekt</li>
+        </ul>
+    </div>
+
+    <div class="steps">
+        <h3>Skapa ett GitHub-konto</h3>
+        <div class="step">
+            <span class="step-number">1</span>
+            <div class="step-content">
+                <div class="step-title">Registrera dig</div>
+                <div class="step-desc">Gå till <a href="https://github.com">github.com</a> och klicka "Sign up". Gratis konto räcker.</div>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">2</span>
+            <div class="step-content">
+                <div class="step-title">Installera GitHub CLI</div>
+                <div class="step-desc">I terminalen:</div>
+                <div class="code-block"># Mac (med Homebrew):
+brew install gh
+
+# Windows (i PowerShell som administratör):
+winget install --id GitHub.cli</div>
+            </div>
+        </div>
+        <div class="step">
+            <span class="step-number">3</span>
+            <div class="step-content">
+                <div class="step-title">Logga in</div>
+                <div class="step-desc">Skriv i terminalen:</div>
+                <div class="code-block">gh auth login</div>
+                <div class="step-desc" style="margin-top: 8px;">Följ frågorna som dyker upp. Välj "GitHub.com" och "Login with a web browser".</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Inga förkunskaper krävs.</strong> Vi går igenom allt under workshopen. Men om du vill vara förberedd sparar du ca 10 minuter genom att installera i förväg.
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════ ÖVNINGAR ════════════════════════════════════════════ -->
+<div class="section" id="ovningar">
+    <h2 class="section-title">Övningar</h2>
+    <p class="section-subtitle">Konkreta saker vi gör under workshopen – från enkla till mer avancerade</p>
+
+    <div class="exercise">
+        <h3>1. Hej Claude – din första konversation</h3>
+        <span class="level level-intro">Block 2 · Intro</span>
+        <p>Starta Claude Code i en tom mapp och be den presentera sig. Utforska vad den kan se och göra.</p>
+        <div class="prompt">
+            <strong>Testa:</strong><br>
+            → "Var befinner du dig just nu? Vilka filer ser du?"<br>
+            → "Skapa en fil som heter hej.txt med en hälsning till mig"<br>
+            → "Skapa en mapp som heter dokument och lägg tre tomma filer i den"
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>2. Skapa en CLAUDE.md – ge Claude ett minne</h3>
+        <span class="level level-intro">Block 3 · Intro</span>
+        <p>Vi skriver en instruktionsfil tillsammans. Berätta för Claude vem du är, vad projektet handlar om, och hur du vill att det ska jobba.</p>
+        <div class="prompt">
+            <strong>Testa:</strong><br>
+            → "Skapa en CLAUDE.md-fil för det här projektet. Jag heter [ditt namn] och jobbar med [ditt område]. Projektet handlar om [beskriv]."<br>
+            → "Jag vill att du alltid svarar på svenska och aldrig föreslår lösningar som kostar pengar utan att fråga mig först."
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>3. Bygg en personlig webbsida</h3>
+        <span class="level level-medium">Block 3 · Praktisk</span>
+        <p>Claude skapar en komplett webbsida åt dig med ditt namn, en kort presentation och valfri design. Du bestämmer innehållet, Claude bygger.</p>
+        <div class="prompt">
+            <strong>Testa:</strong><br>
+            → "Skapa en enkel, snygg webbsida om mig. Jag heter [namn], jobbar som [roll] och brinner för [intressen]. Använd en modern, ljus design."<br>
+            → "Lägg till en sektion om mina projekt/erfarenheter"<br>
+            → "Ändra färgschemat till mörkblått och guld"
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>4. Publicera live med GitHub</h3>
+        <span class="level level-medium">Block 4 · Praktisk</span>
+        <p>Vi tar webbsidan du just skapade och publicerar den på internet – gratis, via GitHub Pages.</p>
+        <div class="prompt">
+            <strong>Testa:</strong><br>
+            → "Hjälp mig publicera den här webbsidan på GitHub Pages. Jag vill att den ska vara tillgänglig på [dittnamn].github.io"<br>
+            → "Uppdatera sidan och publicera ändringarna"
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>5. Skapa din första skill</h3>
+        <span class="level level-medium">Block 5 · Praktisk</span>
+        <p>En skill talar om för Claude hur det ska hantera en specifik situation. Vi skapar en som du faktiskt har nytta av.</p>
+        <div class="prompt">
+            <strong>Exempel på skills du kan skapa:</strong><br>
+            → "Skapa en skill som gör att du alltid levererar dokument i formatet: sammanfattning, bakgrund, rekommendation, nästa steg"<br>
+            → "Skapa en skill för kundmejl som alltid ska vara max 5 meningar, professionella men varma"<br>
+            → "Skapa en skill som genererar veckorapporter med fast mall: highlight, utmaningar, nyckeltal, plan nästa vecka"
+        </div>
+    </div>
+
+    <div class="exercise">
+        <h3>6. Avancerat: Claude som arbetspartner</h3>
+        <span class="level level-advanced">Block 5 · Fördjupning</span>
+        <p>Ge Claude ett mer komplext uppdrag och jobba iterativt – precis som med en riktig kollega.</p>
+        <div class="prompt">
+            <strong>Testa:</strong><br>
+            → "Jag ska hålla en presentation om [ämne] nästa vecka. Hjälp mig ta fram en struktur, skapa slides-underlag och en talarmanus-outline."<br>
+            → "Skapa en intern FAQ-sida för mitt team med de 10 vanligaste frågorna om [ämne]"<br>
+            → "Analysera den här texten och ge mig tre alternativa versioner: en kort (LinkedIn), en medellång (blogg), en lång (rapport)"
+        </div>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════ ORDLISTA ════════════════════════════════════════════ -->
+<div class="section" id="ordlista">
+    <h2 class="section-title">Ordlista</h2>
+    <p class="section-subtitle">Alla begrepp du behöver – förklarat utan krångel</p>
+
+    <dl>
+        <div class="glossary-term">
+            <dt>Claude Code</dt>
+            <dd>Ett AI-verktyg som körs i terminalen (eller som app) och kan läsa, skapa och redigera filer på din dator. Till skillnad från vanlig AI-chatt kan Claude Code faktiskt <em>göra</em> saker – inte bara svara på frågor.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Terminal / Kommandorad</dt>
+            <dd>Ett program där du skriver textkommandon istället för att klicka. På Mac heter det "Terminal", på Windows "PowerShell". Tänk på det som att skicka SMS till din dator.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt><code>CLAUDE.md</code></dt>
+            <dd>En textfil som Claude läser automatiskt varje gång du startar ett projekt. Det är Claude Codes "minne" – här skriver du instruktioner, projektbeskrivning och regler. Tänk på den som en briefing till en ny kollega.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Markdown (.md)</dt>
+            <dd>Ett enkelt sätt att formatera text med symboler: <code># Rubrik</code>, <code>**fetstil**</code>, <code>- punktlista</code>. Filändelsen <code>.md</code> betyder bara att filen använder denna formatering – men det är fortfarande en helt vanlig textfil som du kan öppna och redigera var som helst. CLAUDE.md, skills och andra instruktionsfiler använder markdown.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Skill</dt>
+            <dd>En instruktionsfil som lär Claude ett specifikt beteende. T.ex. "skriv alltid mejl i max 5 meningar" eller "följ alltid den här rapportmallen". Du skapar skills som <code>.md</code>-filer i en speciell mapp.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Slash command</dt>
+            <dd>Ett snabbkommando som börjar med <code>/</code>. T.ex. <code>/help</code> för hjälp eller <code>/commit</code> för att spara ändringar. Genvägar för vanliga uppgifter.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>GitHub</dt>
+            <dd>En plattform för att lagra och dela projekt online. Fungerar som en molnlagring med "spåra ändringar"-funktion. Du kan också publicera webbsidor gratis via GitHub Pages.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>GitHub Pages</dt>
+            <dd>En gratis funktion i GitHub som gör att du kan publicera en webbsida direkt från ditt projekt. Du får en adress som <code>dittnamn.github.io/projektnamn</code>.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Repository (repo)</dt>
+            <dd>Ett "projekt" på GitHub. En mapp med alla dina filer plus en historik över alla ändringar. Tänk: en projektmapp som aldrig glömmer.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Commit</dt>
+            <dd>En sparad version av ditt projekt. Varje commit är som en "checkpoint" – du kan alltid gå tillbaka. Tänk: Ctrl+S, men med en beskrivning av vad du ändrade.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Push</dt>
+            <dd>Att ladda upp dina sparade ändringar (commits) till GitHub. Det som ligger lokalt på din dator skickas upp till molnet.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Node.js / npm</dt>
+            <dd>Node.js är ett program som behövs för att köra Claude Code. npm (Node Package Manager) är verktyget som installerar Claude Code. Du behöver inte förstå mer än att det är en förutsättning som behöver finnas på datorn.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>MCP (Model Context Protocol)</dt>
+            <dd>Ett sätt att koppla Claude Code till externa tjänster som Google Drive, Slack eller databaser. Tänk: plugins eller kopplingar. Du behöver inte veta detta dag 1, men det är nästa steg.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Behörighetsnivåer (Permission modes)</dt>
+            <dd>Du bestämmer hur mycket Claude Code får göra utan att fråga dig. Tre nivåer: <em>fråga alltid</em> (säkrast), <em>tillåt läsning</em> (mellanläge), <em>full tillgång</em> (snabbast men kräver tillit). Under workshopen kör vi på det säkraste läget.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Prompt / Instruktion</dt>
+            <dd>Det du skriver till Claude Code. Kan vara en fråga, ett kommando, eller en beskrivning av vad du vill ha gjort. Ju tydligare du är, desto bättre resultat.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Token / Kostnad</dt>
+            <dd>Claude Code mäter användning i "tokens" (ungefär ord). Ju längre konversationer och ju fler filer Claude läser, desto mer kostar det. Anthropic ger ett gratis startbelopp.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Context window (kontextfönster)</dt>
+            <dd>Claudes "arbetsminne" – hur mycket information den kan ha i huvudet samtidigt. Tänk: ett skrivbord med begränsad yta. Ju längre konversation och ju fler filer, desto fullare blir skrivbordet. När det blir fullt börjar Claude sammanfatta och glömma äldre delar.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt><code>/compact</code></dt>
+            <dd>Ett kommando som sammanfattar hela konversationen till en kortare version. Använd det när Claude börjar "glömma" saker du sagt tidigare – det frigör plats i kontextfönstret utan att du behöver börja om.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt><code>/clear</code></dt>
+            <dd>Rensar hela konversationen och börjar om från noll. Bra när du byter ämne helt. Claude läser fortfarande din CLAUDE.md, så projektinstruktionerna finns kvar.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Plan Mode</dt>
+            <dd>Ett läge där Claude visar sin plan innan den gör något. Istället för att direkt skapa filer säger den: "Jag tänker göra X, Y och Z – okej?" Du godkänner eller justerar innan något händer. Bra för att behålla kontrollen.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Modellval (Opus / Sonnet / Haiku)</dt>
+            <dd>Claude Code kan använda olika AI-modeller: <strong>Opus</strong> (smartast, dyrast – för komplexa uppgifter), <strong>Sonnet</strong> (balanserad – bra för vardagsarbete), <strong>Haiku</strong> (snabbast, billigast – för enkla frågor). Du kan byta under samtalets gång.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Interrupt (Escape)</dt>
+            <dd>Tryck <code>Escape</code> för att avbryta Claude mitt i en uppgift. Användbart om du ser att den är på väg åt fel håll. Inget arbete går förlorat – du kan ge nya instruktioner direkt.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Session / Konversation</dt>
+            <dd>Varje gång du startar Claude Code börjar en ny session. Inom en session minns Claude allt ni pratat om. Mellan sessioner börjar den om (om du inte har CLAUDE.md eller Memory). Du kan återuppta gamla sessioner med <code>claude --resume</code>.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Kontextröta (Context rot)</dt>
+            <dd>Det som händer när kontextfönstret blir för fullt: Claude tappar tråden och ger sämre svar. Lösningen är att använda <code>/compact</code> för att sammanfatta, eller <code>/clear</code> för att börja om. Ett tecken på kontextröta är att Claude upprepar sig eller "glömmer" saker du nyss sa.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Kontrollpunkter (Checkpoints)</dt>
+            <dd>Automatiska ögonblicksbilder som sparas innan Claude gör ändringar. Om något går fel kan du ångra med kommandot <code>/undo</code>. Tänk: ett automatiskt "spara innan"-system som skyddar dig.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Minne (Auto-memory)</dt>
+            <dd>En automatisk funktion som sparar dina preferenser och arbetsmönster över tid – <em>mellan</em> sessioner. Skiljer sig från CLAUDE.md: minnet byggs upp automatiskt av Claude själv, medan CLAUDE.md är instruktioner du skriver manuellt.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Multimodalt stöd</dt>
+            <dd>Claude kan "se" bilder. Du kan klistra in screenshots, foton av whiteboards, eller designskisser – och Claude förstår vad som visas. Användbart för att t.ex. bygga en webbsida utifrån en skiss.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Verktyg (Tools)</dt>
+            <dd>Inbyggda funktioner som Claude automatiskt väljer för att utföra uppgifter: läsa filer, skriva filer, köra kommandon, söka i kodbasen. Du behöver inte veta vilka verktyg som finns – Claude väljer rätt verktyg åt dig.</dd>
+        </div>
+
+        <div class="glossary-term">
+            <dt>Utökat tänkande (Extended thinking)</dt>
+            <dd>En funktion som ger Claude extra tid att resonera och tänka igenom komplexa problem i flera steg innan den agerar. Aktiveras automatiskt vid svårare uppgifter. Kostar fler tokens men ger bättre resultat.</dd>
+        </div>
+    </dl>
+</div>
+
+<!-- ════════════════════════════════════════════ TIPS ════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">Tips och vanliga fallgropar</h2>
+
+    <div class="card">
+        <h3>Gör så här</h3>
+        <ul>
+            <li><strong>Var specifik.</strong> "Skapa en snygg webbsida" → "Skapa en webbsida med mitt namn, en kort bio på 3 meningar, ljus bakgrund och grön accentfärg"</li>
+            <li><strong>Iterera.</strong> Du behöver inte få allt rätt första gången. Säg "ändra rubriken", "gör texten kortare", "byt färg"</li>
+            <li><strong>Läs vad Claude föreslår</strong> innan du godkänner. Du har alltid sista ordet</li>
+            <li><strong>Använd CLAUDE.md.</strong> Allt som Claude ska veta varje gång skriver du där</li>
+            <li><strong>Spara ofta med commits.</strong> Tänk: regelbundna checkpoints</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Undvik det här</h3>
+        <ul>
+            <li><strong>Ladda inte upp känsliga filer</strong> (lönelistor, personnummer, kunddata) utan att först anonymisera</li>
+            <li><strong>Ge inte full behörighet</strong> förrän du förstår vad Claude Code gör</li>
+            <li><strong>Lita inte blint</strong> – granska alltid resultatet, särskilt siffror och fakta</li>
+            <li><strong>Starta inte för stort.</strong> Ett litet projekt först, sedan bygger du vidare</li>
+        </ul>
+    </div>
+
+    <div class="note warning">
+        <strong>Om kostnader:</strong> Claude Code använder tokens för varje interaktion. Du får ett gratis startbelopp. För att hålla kostnaderna nere: var koncis i dina instruktioner, undvik att be Claude läsa onödigt stora filer, och stäng sessionen när du är klar. Under workshopen jobbar vi med små projekt som kostar väldigt lite.
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════ RESURSER ════════════════════════════════════════════ -->
+<div class="section">
+    <h2 class="section-title">Resurser och nästa steg</h2>
+
+    <div class="card">
+        <h3>Fortsätt lära dig</h3>
+        <ul>
+            <li><a href="https://docs.anthropic.com/en/docs/claude-code/overview" style="color: #C87C5C; font-weight: 500;">Officiell Claude Code-dokumentation</a> – fullständig guide</li>
+            <li><a href="https://github.com/anthropics/claude-code" style="color: #C87C5C; font-weight: 500;">Claude Code på GitHub</a> – öppen källkod och community</li>
+            <li><a href="https://michaelcrist.substack.com/p/claude-code" style="color: #C87C5C; font-weight: 500;">The Non-Technical Person's Guide to Claude Code</a> – utmärkt genomgång</li>
+            <li><a href="https://claude.ai/download" style="color: #C87C5C; font-weight: 500;">Ladda ner Claude Code desktop-app</a> – grafiskt alternativ till terminalen</li>
+        </ul>
+    </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+    <p><strong>We Should Be Friends AB</strong></p>
+    <p>Workshop · Kom igång med Claude Code · 24 april 2026</p>
+</div>
+
+<script>
+    function showTab(platform) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(platform + '-tab').classList.add('active');
+        event.target.classList.add('active');
+    }
+</script>
+</body>
+</html>
