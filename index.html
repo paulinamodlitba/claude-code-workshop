@@ -156,47 +156,70 @@
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="showTab('mac')">Mac</button>
-        <button class="tab-btn" onclick="showTab('windows')">Windows</button>
+        <button class="tab-btn active" onclick="showTab('app')">Desktop-appen</button>
+        <button class="tab-btn" onclick="showTab('terminal')">Terminalen</button>
     </div>
 
-    <!-- ── Mac ── -->
-    <div id="mac-tab" class="tab-content active">
+    <!-- ── Desktop-appen ── -->
+    <div id="app-tab" class="tab-content active">
         <div class="steps">
-            <h3>Installation på Mac</h3>
+            <h3>Installation via desktop-appen (enklast)</h3>
 
             <div class="step">
                 <span class="step-number">1</span>
                 <div class="step-content">
-                    <div class="step-title">Skapa ett konto hos Anthropic</div>
-                    <div class="step-desc">Gå till <a href="https://console.anthropic.com/">console.anthropic.com</a> och skapa ett konto. Du behöver verifiera med e-post.</div>
+                    <div class="step-title">Skapa ett konto och uppgradera till Pro</div>
+                    <div class="step-desc">Gå till <a href="https://claude.ai">claude.ai</a>, skapa ett konto och uppgradera till Pro under Settings > Subscription.</div>
                 </div>
             </div>
 
             <div class="step">
                 <span class="step-number">2</span>
                 <div class="step-content">
-                    <div class="step-title">Installera Node.js</div>
-                    <div class="step-desc">Öppna Terminal (sök efter "Terminal" i Spotlight med Cmd+Mellanslag). Klistra in:</div>
-                    <div class="code-block">node --version</div>
-                    <div class="step-desc" style="margin-top: 8px;">Ser du ett versionsnummer (t.ex. v20.x.x)? Då är du klar! Om inte, gå till <a href="https://nodejs.org/">nodejs.org</a> och ladda ner LTS-versionen. Installera som vanligt program.</div>
+                    <div class="step-title">Ladda ner Claude-appen</div>
+                    <div class="step-desc">Gå till <a href="https://claude.ai/download">claude.ai/download</a> och ladda ner appen för Mac eller Windows. Installera som ett vanligt program. Appen innehåller chatt, samarbete och Claude Code på ett ställe.</div>
                 </div>
             </div>
 
             <div class="step">
                 <span class="step-number">3</span>
                 <div class="step-content">
-                    <div class="step-title">Installera Claude Code</div>
-                    <div class="step-desc">I Terminal, skriv:</div>
-                    <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
+                    <div class="step-title">Öppna Claude Code i appen</div>
+                    <div class="step-desc">Starta appen och välj Claude Code. Peka den mot en mapp på din dator och du är igång.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Terminalen ── -->
+    <div id="terminal-tab" class="tab-content">
+        <div class="steps">
+            <h3>Installation via terminalen</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <div class="step-title">Skapa ett konto och uppgradera till Pro</div>
+                    <div class="step-desc">Gå till <a href="https://claude.ai">claude.ai</a>, skapa ett konto och uppgradera till Pro under Settings > Subscription.</div>
                 </div>
             </div>
 
             <div class="step">
-                <span class="step-number">4</span>
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <div class="step-title">Installera Claude Code</div>
+                    <div class="step-desc"><strong>Mac/Linux:</strong> Öppna Terminal och kör:</div>
+                    <div class="code-block">curl -fsSL https://claude.ai/install.sh | bash</div>
+                    <div class="step-desc" style="margin-top: 12px;"><strong>Windows:</strong> Öppna PowerShell och kör:</div>
+                    <div class="code-block">irm https://claude.ai/install.ps1 | iex</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
                 <div class="step-content">
                     <div class="step-title">Starta Claude Code</div>
-                    <div class="step-desc">Skapa en mapp för ditt projekt och starta Claude Code:</div>
+                    <div class="step-desc">Skapa en mapp för ditt projekt och starta:</div>
                     <div class="code-block">mkdir mitt-projekt
 cd mitt-projekt
 claude</div>
@@ -205,56 +228,7 @@ claude</div>
             </div>
 
             <div class="note">
-                <strong>Vad är Terminal?</strong> Det är ett program som redan finns på din Mac. Istället för att klicka på ikoner skriver du kommandon. Tänk på det som att skicka textmeddelanden till din dator.
-            </div>
-        </div>
-    </div>
-
-    <!-- ── Windows ── -->
-    <div id="windows-tab" class="tab-content">
-        <div class="steps">
-            <h3>Installation på Windows</h3>
-
-            <div class="step">
-                <span class="step-number">1</span>
-                <div class="step-content">
-                    <div class="step-title">Skapa ett konto hos Anthropic</div>
-                    <div class="step-desc">Gå till <a href="https://console.anthropic.com/">console.anthropic.com</a> och skapa ett konto.</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <span class="step-number">2</span>
-                <div class="step-content">
-                    <div class="step-title">Installera Node.js</div>
-                    <div class="step-desc">Gå till <a href="https://nodejs.org/">nodejs.org</a> och ladda ner LTS-versionen. Installera som vanligt (klicka Next hela vägen). Öppna sedan PowerShell (sök i startmenyn) och skriv:</div>
-                    <div class="code-block">node --version</div>
-                    <div class="step-desc" style="margin-top: 8px;">Ser du ett versionsnummer? Bra, då funkar det!</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <span class="step-number">3</span>
-                <div class="step-content">
-                    <div class="step-title">Installera Claude Code</div>
-                    <div class="step-desc">I PowerShell, skriv:</div>
-                    <div class="code-block">npm install -g @anthropic-ai/claude-code</div>
-                </div>
-            </div>
-
-            <div class="step">
-                <span class="step-number">4</span>
-                <div class="step-content">
-                    <div class="step-title">Starta Claude Code</div>
-                    <div class="step-desc">Skapa en mapp och starta:</div>
-                    <div class="code-block">mkdir mitt-projekt
-cd mitt-projekt
-claude</div>
-                </div>
-            </div>
-
-            <div class="note">
-                <strong>Alternativ för Windows:</strong> Claude Code finns också som en <a href="https://claude.ai/download">desktop-app</a> om du hellre vill slippa terminalen helt. Den fungerar likadant men med ett grafiskt fönster.
+                <strong>Vad är Terminal?</strong> Det är ett program som redan finns på din dator. På Mac heter det "Terminal" (sök med Cmd+Mellanslag), på Windows heter det "PowerShell" (sök i startmenyn). Istället för att klicka på ikoner skriver du kommandon. Tänk på det som att skicka textmeddelanden till din dator.
             </div>
         </div>
     </div>
@@ -609,7 +583,7 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Node.js / npm</dt>
-            <dd>Node.js är ett program som behövs för att köra Claude Code. npm (Node Package Manager) är verktyget som installerar Claude Code. Du behöver inte förstå mer än att det är en förutsättning som behöver finnas på datorn.</dd>
+            <dd>Node.js är en plattform för att köra JavaScript-program. Behövs inte för att använda Claude Code (du kan installera via desktop-appen eller det inbyggda installationsskriptet), men kan dyka upp i tekniska sammanhang.</dd>
         </div>
 
         <div class="glossary-term">
