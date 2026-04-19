@@ -365,12 +365,9 @@ winget install --id GitHub.cli</div>
         </div>
 
         <div class="note" style="margin-bottom: 24px;">
-            <strong>Två sätt att skapa en agent</strong><br><br>
-            <strong>Sätt 1: Via kommandot <code>/agents</code></strong><br>
-            Skriv <code>/agents</code> i Claude Code. Du får en guide som leder dig genom att namnge agenten och beskriva vad den ska göra. Bra om du vill ha mer kontroll över processen.<br><br>
-            <strong>Sätt 2: Be Claude göra det</strong><br>
-            Skriv rakt ut vad du vill ha, t.ex. "Skapa en agent som heter dataanalytiker och som kan läsa CSV-filer och hitta trender." Claude skapar agentfilen åt dig automatiskt. Snabbare om du redan vet vad du vill.<br><br>
-            Båda sätten ger samma resultat. Testa gärna båda och se vilket som känns bäst.
+            <strong>Så skapar du en agent</strong><br><br>
+            Skriv rakt ut vad du vill ha, t.ex. "Skapa en agent som heter dataanalytiker och som kan läsa CSV-filer och hitta trender." Claude skapar agentfilen åt dig automatiskt och sparar den i <code>.claude/agents/</code>.<br><br>
+            I terminalen finns också kommandot <code>/agents</code> som öppnar ett interaktivt gränssnitt för att skapa och hantera agenter. Det funkar inte i desktop-appen, så vi håller oss till att prata med Claude i vanlig text under workshopen.
         </div>
 
         <div class="prompt" style="margin-bottom: 16px;">
@@ -379,8 +376,7 @@ winget install --id GitHub.cli</div>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>kundbrief.txt</code>. Hitta på en trovärdig potentiell kund till vårt företag som vill ha hjälp med något vi erbjuder. Skriv briefen från kundens perspektiv: vad de behöver, vilken målgrupp de har, vad presentationen ska användas till och vilken ton de vill ha. Gör det realistiskt baserat på vår verksamhet i CLAUDE.md."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → Via <code>/agents</code>: namnge den "presentationsbyggare" och beskriv att den ska ta kundbriefs och skapa presentationsunderlag som <code>.pptx</code> (PowerPoint), i linje med vår varumärkesröst och visuella identitet i CLAUDE.md.<br>
-            → Eller skriv: "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag som en <code>.pptx</code>-fil med struktur, talarpunkter och designförslag, i linje med vår varumärkesröst och visuella identitet i CLAUDE.md."<br><br>
+            → "Skapa en agent som heter presentationsbyggare. Den ska kunna ta en kundbrief och skapa ett komplett presentationsunderlag som en <code>.pptx</code>-fil med struktur, talarpunkter och designförslag, i linje med vår varumärkesröst och visuella identitet i CLAUDE.md."<br><br>
             <strong>Steg 3: Testa</strong><br>
             → "Läs kundbriefet och skapa ett presentationsunderlag som följer vår grafiska profil. Leverera som .pptx."
         </div>
@@ -391,8 +387,7 @@ winget install --id GitHub.cli</div>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>verksamhetsdata.csv</code> med realistisk data för vårt företag. Sex månader, med kolumner som passar vår typ av verksamhet (t.ex. intäkter, kunder, projekt, timmar, kostnader). Basera allt på vad vi gör enligt CLAUDE.md. Lägg in några mönster: något som går bra, något som behöver uppmärksamhet, och en förändring över tid."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → Via <code>/agents</code>: namnge den "dataanalytiker" och beskriv att den ska kunna läsa CSV-filer, hitta mönster och trender och leverera resultatet som en <code>.html</code>-sida med diagram och visualiseringar.<br>
-            → Eller skriv: "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender och leverera en tydlig sammanfattning som en <code>.html</code>-sida med diagram och visualiseringar."<br><br>
+            → "Skapa en agent som heter dataanalytiker. Den ska kunna läsa CSV-filer, hitta mönster och trender och leverera en tydlig sammanfattning som en <code>.html</code>-sida med diagram och visualiseringar."<br><br>
             <strong>Steg 3: Testa</strong><br>
             → "Analysera vår verksamhetsdata. Vad går bra? Vad behöver uppmärksamhet? Vad bör vi göra annorlunda? Visa resultatet som en interaktiv HTML-dashboard."
         </div>
@@ -403,8 +398,7 @@ winget install --id GitHub.cli</div>
             <strong>Steg 1: Generera data</strong><br>
             → "Skapa en fil som heter <code>kundarenden.txt</code> med fem realistiska kundärenden till vårt företag. Blanda: en offertförfrågan, ett klagomål, en uppföljning efter möte, en enkel fråga och en partnerförfrågan. Skriv dem som riktiga mejl med avsändare, ämnesrad och brödtext. Basera allt på vår verksamhet i CLAUDE.md."<br><br>
             <strong>Steg 2: Skapa agenten</strong><br>
-            → Via <code>/agents</code>: namnge den "kundkommunikatör" och beskriv att den ska läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt. Svaren ska vara ren text redo att klistras in i ett mejl.<br>
-            → Eller skriv: "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt. Leverera varje svar som ren text redo att klistras in i ett mejl."<br><br>
+            → "Skapa en agent som heter kundkommunikatör. Den ska kunna läsa kundärenden och skriva professionella svar i vår ton. Aldrig för formellt, aldrig för slarvigt. Leverera varje svar som ren text redo att klistras in i ett mejl."<br><br>
             <strong>Steg 3: Testa</strong><br>
             → "Läs kundärendena och skriv förslag på svar till alla fem. Prioritera det mest brådskande först."
         </div>
@@ -544,7 +538,7 @@ winget install --id GitHub.cli</div>
 
         <div class="glossary-term">
             <dt>Agent</dt>
-            <dd>En specialist som du skapar i Claude Code för en specifik uppgift. T.ex. en "innehållsstrateg" som gör research, eller en "presentationsspecialist" som bygger slides. Agenter har en roll, kunskap (via skills) och tillgång till verktyg. Du skapar dem med kommandot <code>/agents</code>.</dd>
+            <dd>En specialist som du skapar i Claude Code för en specifik uppgift. T.ex. en "innehållsstrateg" som gör research, eller en "presentationsspecialist" som bygger slides. Agenter har en roll, kunskap (via skills) och tillgång till verktyg. Du skapar dem genom att be Claude göra det, t.ex. "Skapa en agent som heter innehållsstrateg..."</dd>
         </div>
 
         <div class="glossary-term">
