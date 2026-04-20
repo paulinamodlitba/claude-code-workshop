@@ -1,0 +1,76 @@
+Ämnesrad: Den 24 april kör vi. Här är det du behöver förbereda.
+
+---
+
+Hej!
+
+Vad kul att du ska vara med på "Kom igång med Claude Code" den 24 april.
+
+Under 3,5 timmar bygger vi ett riktigt projekt från scratch: du skapar ett eget AI-workspace med filer, agenter och skills, och publicerar resultatet live på internet. Allt utan att skriva en rad kod.
+
+Du behöver inga förkunskaper. Vi börjar från början och går steg för steg.
+
+
+Innan workshopen: det här behöver du göra
+
+Det finns en sak som är ett måste, och några saker som är frivilliga men sparar tid.
+
+
+Måste: Skapa ett Claude Pro-konto och ladda ner Claude (10 min)
+
+Claude Code är inte samma sak som att chatta med Claude i webbläsaren. Det är ett verktyg som kan arbeta direkt med filer och projekt på din dator. Du kommer åt Claude Code via terminalen eller genom att ladda ner Claude-appen, som samlar chatt, samarbete och Claude Code på ett ställe.
+
+För att använda Claude Code behöver du ett betalkonto hos Anthropic. Jag rekommenderar Claude Pro som kostar cirka 20 dollar i månaden. Välj månadsabonnemang, inte årsbetalning, så kan du enkelt avsluta efter workshopen om du vill.
+
+Gör detta innan workshopen:
+
+1. Ladda ner Claude-appen: https://claude.ai/download
+2. Öppna appen och logga in om du redan har ett konto, annars skapa ett nytt
+3. Uppgradera till Pro under Settings > Subscription
+
+Om du redan har ett Claude-konto men inte Pro kan du uppgradera samma dag som workshopen, men gör det gärna i förväg så vi slipper vänta på att betalningen går igenom.
+
+Om du vill köra Claude Code lite mer hardcore i terminalen finns instruktioner längre ner i mailet.
+
+
+Frivilligt: Installera via terminalen istället (2 min)
+
+Om du hellre vill köra Claude Code i terminalen (vi går igenom detta under workshopen också):
+
+Mac/Linux: Öppna Terminal och kör:
+curl -fsSL https://claude.ai/install.sh | bash
+
+Windows: Öppna PowerShell och kör:
+irm https://claude.ai/install.ps1 | iex
+
+
+Frivilligt: Skapa ett GitHub-konto (2 min)
+
+Vi använder GitHub för att publicera ditt projekt online. Gå till https://github.com och klicka "Sign up". Gratis konto räcker.
+
+
+Frivilligt: Fundera på ett företag
+
+Under workshopen bygger du ett AI-workspace för ett litet företag. Det kan vara ditt eget, ett du jobbar på, eller ett helt påhittat. Om du redan har en idé sparar det lite tid. Och om du har en hemsida i åtanke (eget företag eller ett annat) kan Claude hämta information därifrån direkt.
+
+Har du ingen idé? Inga problem. Claude hittar på ett åt dig under workshopen.
+
+
+Kika igenom workshopsidan
+
+Här hittar du en introduktion till vad Claude Code är, alla övningar vi ska göra, en ordlista med viktiga begrepp och installationsinstruktioner. Bra att skumma igenom innan så du vet vad du har framför dig:
+https://paulinamodlitba.github.io/claude-code-workshop/
+
+
+Ta med dig
+
+Din laptop (Mac eller Windows), laddare, och om du har egna filer du vill testa med (projektbeskrivningar, kundmaterial, varumärkesguider) kan du ta med dem. Inget krav.
+
+
+Om något krånglar
+
+Det är helt okej om installationen strular. Det är precis därför vi har ett helt block dedikerat till det. Kom som du är.
+
+Ses den 24:e!
+
+Paulina
