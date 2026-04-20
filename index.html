@@ -210,7 +210,7 @@
                 <strong>För dig som kör Windows:</strong> Första gången du öppnar Code-fliken får du en prompt om att installera <strong>Git for Windows</strong>. Det är en kostnadsfri förutsättning som Claude behöver för att jobba med lokala filer. Så här gör du:<br><br>
                 1. Klicka på <strong>"Download Git"</strong> i dialogen<br>
                 2. Installera som ett vanligt program med standardinställningarna (klicka Next hela vägen)<br>
-                3. <strong>Stäng Claude-appen helt via Aktivitetshanteraren.</strong> Att bara klicka på krysset räcker inte, appen körs kvar i bakgrunden. Öppna Aktivitetshanteraren (Ctrl+Shift+Esc), hitta Claude i listan, högerklicka och välj <strong>"Avsluta aktivitet"</strong><br>
+                3. Du kommer troligtvis behöva <strong>stänga Claude-appen helt via Aktivitetshanteraren</strong> för att appen ska känna av att Git är installerat. Att bara klicka på krysset räcker inte, appen körs kvar i bakgrunden. Öppna Aktivitetshanteraren (Ctrl+Shift+Esc), hitta Claude i listan, högerklicka och välj <strong>"Avsluta aktivitet"</strong><br>
                 4. Öppna Claude-appen igen<br><br>
                 På Mac ingår Git redan som standard så du slipper det här steget.
             </div>
@@ -277,40 +277,23 @@ claude                     # starta Claude Code</div>
     </div>
 
     <div class="steps">
-        <h3>Skapa ett GitHub-konto</h3>
+        <h3>Kom igång med GitHub</h3>
         <div class="step">
             <span class="step-number">1</span>
             <div class="step-content">
                 <div class="step-title">Registrera dig</div>
-                <div class="step-desc">Gå till <a href="https://github.com">github.com</a> och klicka "Sign up". Gratis konto räcker.</div>
+                <div class="step-desc">Gå till <a href="https://github.com">github.com</a> och klicka "Sign up". Gratis konto räcker. Det är allt du behöver göra i förväg.</div>
             </div>
         </div>
         <div class="step">
             <span class="step-number">2</span>
             <div class="step-content">
-                <div class="step-title">Installera GitHub CLI</div>
-                <div class="step-desc">Enklaste sättet: gå till <a href="https://cli.github.com/">cli.github.com</a> och ladda ner installationsprogrammet för Mac (.pkg) eller Windows (.msi). Dubbelklicka för att installera.</div>
-                <div class="step-desc" style="margin-top: 12px;">Har du Homebrew (Mac) eller winget (Windows) kan du istället köra:</div>
-                <div class="code-block"># Mac (med Homebrew):
-brew install gh
-
-# Windows (med winget):
-winget install --id GitHub.cli</div>
+                <div class="step-title">Låt Claude Code guida dig resten av vägen</div>
+                <div class="step-desc">Öppna Claude Code och klistra in den här prompten:</div>
+                <div class="code-block">Jag har nu registrerat ett github-konto och vill publicera en första enkel hemsida om hur Claude Code fungerar. Kan du hjälpa mig med det och guida mig. Jag ger dig access när det behövs.</div>
+                <div class="step-desc" style="margin-top: 8px;">Claude hjälper dig att installera GitHub CLI, logga in och publicera din första sida, steg för steg.</div>
             </div>
         </div>
-        <div class="step">
-            <span class="step-number">3</span>
-            <div class="step-content">
-                <div class="step-title">Logga in</div>
-                <div class="step-desc">Öppna Terminal (Mac) eller PowerShell (Windows) och skriv:</div>
-                <div class="code-block">gh auth login</div>
-                <div class="step-desc" style="margin-top: 8px;">Följ frågorna som dyker upp. Välj "GitHub.com" och "Login with a web browser".</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="note">
-        <strong>Inga förkunskaper krävs.</strong> Vi går igenom allt under workshopen. Men om du vill vara förberedd sparar du ca 10 minuter genom att installera i förväg. Funkar inget? Claude Code kan hjälpa dig med installationen under workshopen.
     </div>
 </div>
 
