@@ -207,12 +207,24 @@
             </div>
 
             <div class="note">
-                <strong>För dig som kör Windows:</strong> Första gången du öppnar Code-fliken får du en prompt om att installera <strong>Git for Windows</strong>. Det är en kostnadsfri förutsättning som Claude behöver för att jobba med lokala filer. Så här gör du:<br><br>
+                <strong>Git behövs för att köra lokalt:</strong> Första gången du öppnar Code-fliken kan du få en prompt om att installera <strong>Git</strong>, ett litet gratisverktyg som Claude behöver för att jobba med filer på din dator. Om du får prompten, följ stegen nedan för din plattform.
+            </div>
+
+            <div class="note">
+                <strong>För dig som kör Mac:</strong> Git följer oftast med Mac, men på äldre eller nyligen återställda datorer kan det saknas. Så här gör du om du får prompten:<br><br>
+                1. Klicka på <strong>"Download Git"</strong> i dialogen, eller öppna Terminal och kör <code>xcode-select --install</code><br>
+                2. En installationsruta dyker upp (kan gömma sig bakom andra fönster, kolla Dock och använd Cmd+Tab). Klicka <strong>Install</strong> och acceptera licensen<br>
+                3. Installationen tar 5–10 minuter. Du kan behöva ange ditt Mac-lösenord<br>
+                4. När det är klart: verifiera i Terminal med <code>git --version</code><br>
+                5. <strong>Stäng Claude-appen helt via Force Quit</strong> (Cmd+Option+Esc → välj Claude → Force Quit) och öppna igen. Att bara klicka på det röda krysset räcker inte
+            </div>
+
+            <div class="note">
+                <strong>För dig som kör Windows:</strong> Så här gör du om du får prompten om att installera Git for Windows:<br><br>
                 1. Klicka på <strong>"Download Git"</strong> i dialogen<br>
                 2. Installera som ett vanligt program med standardinställningarna (klicka Next hela vägen)<br>
                 3. Du kommer troligtvis behöva <strong>stänga Claude-appen helt via Aktivitetshanteraren</strong> för att appen ska känna av att Git är installerat. Att bara klicka på krysset räcker inte, appen körs kvar i bakgrunden. Öppna Aktivitetshanteraren (Ctrl+Shift+Esc), hitta Claude i listan, högerklicka och välj <strong>"Avsluta aktivitet"</strong><br>
-                4. Öppna Claude-appen igen<br><br>
-                På Mac ingår Git redan som standard så du slipper det här steget.
+                4. Öppna Claude-appen igen
             </div>
         </div>
     </div>
