@@ -22,7 +22,7 @@ Claude Code är inte samma sak som att chatta med Claude i webbläsaren. Det är
 
 För att använda Claude Code behöver du ett betalkonto hos Anthropic. Jag rekommenderar Claude Pro som kostar cirka 20 dollar i månaden. Välj månadsabonnemang, inte årsbetalning, så kan du enkelt avsluta efter workshopen om du vill.
 
-Obs: Anthropic gjorde nyligen ett kort test där Claude Code exkluderades från Pro-planen. Det rullades tillbaka samma dag, men det kan hända igen. Om du när du uppgraderar ser att Claude Code kräver Max-planen (cirka 100 dollar/mån), hör av dig till mig så löser vi det.
+Obs: Anthropic gjorde nyligen ett kort betatest där Claude Code exkluderades från Pro-planen för 2% av nya prenumeranter. Det rullades tillbaka samma dag, men det kan hända igen. Om du när du uppgraderar ser att Claude Code kräver Max-planen (cirka 100 dollar/mån), hör av dig till mig.
 
 Gör detta innan workshopen:
 
