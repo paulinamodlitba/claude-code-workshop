@@ -1,0 +1,27 @@
+# Deltagarlistor med personuppgifter – får ej pushas till GitHub
+deltagare_*.csv
+intresseanmalda_*.csv
+
+# Inloggningsuppgifter och paket – får ej pushas till GitHub
+valkomstmail.txt
+upload-paket.zip
+
+# Lokala arbetsfiler – inte för publik visning
+intro-forelasning.md
+intro-forelasning.txt
+detaljerat-upplagg.md
+schema.txt
+
+# Workshop-innehåll – flyttat till lösenordsskyddad sajt
+data/
+overview.png
+code-tab.png
+sa-fungerar-claude-code.png
+ChatGPT*.png
+Skärmavbild*.png
+
+# System
+.DS_Store
+
+# Uppackat upload-paket
+upload-paket/
