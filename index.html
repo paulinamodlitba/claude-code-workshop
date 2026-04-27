@@ -99,6 +99,12 @@
         .footer p { font-size: 15px; line-height: 1.6; color: #FFE8E0; margin-bottom: 8px; }
         .footer strong { color: white; }
 
+        /* ── Phase divider ── */
+        .phase-divider { background: linear-gradient(135deg, #411B38 0%, #5A2E48 100%); border-radius: 18px; padding: 56px 32px; margin: 60px 0 20px; text-align: center; }
+        .phase-divider .phase-label { font-size: 14px; font-weight: 600; color: #C87C5C; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+        .phase-divider h2 { font-size: 40px; font-weight: 700; color: white; margin: 0; line-height: 1.1; letter-spacing: -0.003em; }
+        .phase-divider p { font-size: 18px; color: #FFE8E0; margin-top: 14px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+
         /* ── Responsive ── */
         @media (max-width: 768px) {
             .hero h1 { font-size: 36px; }
@@ -108,6 +114,8 @@
             .cta-box { padding: 40px 22px; }
             .cta-box h2 { font-size: 28px; }
             .comparison { grid-template-columns: 1fr; }
+            .phase-divider { padding: 40px 22px; }
+            .phase-divider h2 { font-size: 28px; }
         }
     </style>
 </head>
@@ -144,6 +152,13 @@
         <p style="margin-top: 16px;">Allt detta skrivs i markdown, ett enkelt textformat med rubriker och punktlistor. Inga programmeringsspråk, inga komplicerade verktyg. Bara text.</p>
         <img src="overview.png" alt="Översikt: Så fungerar Claude Code" style="width: 100%; border-radius: 12px; margin-top: 24px;">
     </div>
+</div>
+
+<!-- ════════════════════════════════════════════ FAS 1: FÖRBEREDELSE ════════════════════════════════════════════ -->
+<div class="phase-divider">
+    <div class="phase-label">Fas 1 av 2</div>
+    <h2>Förbered dig innan workshopen</h2>
+    <p>Det här gör du i förväg så att vi kan dyka rakt in i det roliga när vi ses. Räkna med ungefär 20 minuter.</p>
 </div>
 
 <!-- ════════════════════════════════════════════ INSTALLATION ════════════════════════════════════════════ -->
@@ -329,6 +344,13 @@ claude                     # starta Claude Code</div>
     </div>
 </div>
 
+
+<!-- ════════════════════════════════════════════ FAS 2: I WORKSHOPEN ════════════════════════════════════════════ -->
+<div class="phase-divider">
+    <div class="phase-label">Fas 2 av 2</div>
+    <h2>Vad vi gör tillsammans i workshopen</h2>
+    <p>De här övningarna går vi igenom på plats. Du behöver inte göra dem i förväg, men gärna skumma igenom så du vet vad som väntar.</p>
+</div>
 
 <!-- ════════════════════════════════════════════ ÖVNINGAR ════════════════════════════════════════════ -->
 <div class="section" id="ovningar">
