@@ -240,6 +240,7 @@ form.inline {
 
 input,
 select,
+textarea,
 button {
   font: inherit;
   font-size: 13.5px;
@@ -248,6 +249,10 @@ button {
   background: var(--surf);
   color: var(--ink);
   padding: 7px 10px;
+}
+textarea {
+  width: 100%;
+  resize: vertical;
 }
 
 button {
