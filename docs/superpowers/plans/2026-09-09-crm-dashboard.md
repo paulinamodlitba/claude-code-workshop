@@ -176,9 +176,15 @@ Open the Supabase project's SQL editor (created in Task 11) and run the file's c
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
 export function createServerSupabaseClient(): SupabaseClient {
-  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!, {
+    global: {
+      fetch: (input, init) => fetch(input, { ...init, cache: 'no-store' }),
+    },
+  })
 }
 ```
+
+The explicit `cache: 'no-store'` matters: without it, Next.js's fetch patching can cache the Supabase client's requests, so pages built with `export const dynamic = 'force-dynamic'` alone can still serve stale data (confirmed during manual verification — the dashboard showed 0 participants after an import that had actually succeeded).
 
 - [ ] **Step 4: Commit**
 
@@ -1122,21 +1128,43 @@ function parseCsv(content: string): Record<string, string>[] {
     })
 }
 
+function parseAmount(raw: string | undefined): number {
+  if (!raw) return 0
+  const digits = raw.replace(/[^\d]/g, '')
+  return digits ? Number(digits) : 0
+}
+
 async function importDeltagare(filePath: string, courseDateId: string) {
   const content = readFileSync(filePath, 'utf-8')
   const rows = parseCsv(content)
 
+  let successCount = 0
+  const failures: { row: Record<string, string>; error: string }[] = []
+
   for (const row of rows) {
-    await supabase.from('participants').insert({
+    const { error } = await supabase.from('participants').insert({
       course_date_id: courseDateId,
       name: row['Namn'],
       email: row['E-post'],
-      amount_paid_sek: Number(row['Betalt (inkl. moms)'] ?? 0),
+      amount_paid_sek: parseAmount(row['Betalt (inkl. moms)']),
       note: row['Notering'] || null,
     })
+
+    if (error) {
+      failures.push({ row, error: error.message })
+    } else {
+      successCount++
+    }
   }
 
-  console.log(`Importerade ${rows.length} deltagare från ${filePath}`)
+  console.log(`Importerade ${successCount}/${rows.length} deltagare från ${filePath}`)
+  if (failures.length > 0) {
+    console.error(`${failures.length} rader misslyckades:`)
+    for (const f of failures) {
+      console.error(`  ${f.row['Namn']} (${f.row['E-post']}): ${f.error}`)
+    }
+    process.exitCode = 1
+  }
 }
 
 async function main() {
