@@ -27,7 +27,9 @@ crm-dashboard/
 │   ├── matching.ts
 │   ├── matching.test.ts
 │   ├── stripe-webhook.ts
-│   └── stripe-webhook.test.ts
+│   ├── stripe-webhook.test.ts
+│   ├── auth.ts
+│   └── auth.test.ts
 ├── app/
 │   ├── layout.tsx
 │   ├── page.tsx                        (kurstillfällen — startsida)
@@ -455,6 +457,8 @@ git commit -m "feat: add Stripe checkout completed/expired handlers"
 
 **Files:**
 - Create: `crm-dashboard/app/api/stripe/webhook/route.ts`
+- Create: `crm-dashboard/lib/auth.ts`
+- Test: `crm-dashboard/lib/auth.test.ts`
 - Create: `crm-dashboard/middleware.ts`
 - Create: `crm-dashboard/app/login/page.tsx`
 - Create: `crm-dashboard/app/api/login/route.ts`
@@ -497,13 +501,125 @@ export async function POST(request: Request) {
 }
 ```
 
-- [ ] **Step 2: Write the middleware**
+- [ ] **Step 2: Write the auth helper**
+
+The login cookie must not store the raw password (a leaked cookie would leak the password), and the redirect target must be validated (an unvalidated `from` param is an open-redirect vector). `middleware.ts` runs in the Next.js Edge Runtime, which does not support Node's `node:crypto` module, so this uses the Web Crypto API (`crypto.subtle`) instead — it works in both the Edge Runtime and Node.
+
+```ts
+// crm-dashboard/lib/auth.ts
+const SESSION_PAYLOAD = 'crm-authenticated'
+
+async function importHmacKey(password: string): Promise<CryptoKey> {
+  return crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(password),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  )
+}
+
+export async function createAuthToken(password: string): Promise<string> {
+  const key = await importHmacKey(password)
+  const signature = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(SESSION_PAYLOAD))
+  return Array.from(new Uint8Array(signature))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+export function constantTimeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false
+  let mismatch = 0
+  for (let i = 0; i < a.length; i++) {
+    mismatch |= a.charCodeAt(i) ^ b.charCodeAt(i)
+  }
+  return mismatch === 0
+}
+
+export async function isValidAuthToken(
+  token: string | undefined,
+  password: string
+): Promise<boolean> {
+  if (!token) return false
+  const expected = await createAuthToken(password)
+  return constantTimeEqual(token, expected)
+}
+
+export function safeRedirectPath(from: string | null | undefined): string {
+  if (!from || !from.startsWith('/') || from.startsWith('//') || from.startsWith('/\\')) {
+    return '/'
+  }
+  return from
+}
+```
+
+```ts
+// crm-dashboard/lib/auth.test.ts
+import { describe, it, expect } from 'vitest'
+import { createAuthToken, isValidAuthToken, safeRedirectPath, constantTimeEqual } from './auth'
+
+describe('createAuthToken / isValidAuthToken', () => {
+  it('accepts a token created from the same password', async () => {
+    const token = await createAuthToken('hemligt')
+    expect(await isValidAuthToken(token, 'hemligt')).toBe(true)
+  })
+
+  it('rejects a token created from a different password', async () => {
+    const token = await createAuthToken('fel-lösenord')
+    expect(await isValidAuthToken(token, 'hemligt')).toBe(false)
+  })
+
+  it('rejects a missing token', async () => {
+    expect(await isValidAuthToken(undefined, 'hemligt')).toBe(false)
+  })
+
+  it('never stores the raw password as the token', async () => {
+    const token = await createAuthToken('hemligt')
+    expect(token).not.toBe('hemligt')
+  })
+})
+
+describe('constantTimeEqual', () => {
+  it('returns true for identical strings', () => {
+    expect(constantTimeEqual('abc123', 'abc123')).toBe(true)
+  })
+
+  it('returns false for different strings of the same length', () => {
+    expect(constantTimeEqual('abc123', 'abc124')).toBe(false)
+  })
+
+  it('returns false for strings of different length', () => {
+    expect(constantTimeEqual('abc', 'abcdef')).toBe(false)
+  })
+})
+
+describe('safeRedirectPath', () => {
+  it('allows a plain relative path', () => {
+    expect(safeRedirectPath('/kurstillfalle/123')).toBe('/kurstillfalle/123')
+  })
+
+  it('falls back to / for a missing value', () => {
+    expect(safeRedirectPath(undefined)).toBe('/')
+  })
+
+  it('falls back to / for a protocol-relative URL (open redirect attempt)', () => {
+    expect(safeRedirectPath('//evil.example.com')).toBe('/')
+  })
+
+  it('falls back to / for an absolute URL', () => {
+    expect(safeRedirectPath('https://evil.example.com')).toBe('/')
+  })
+})
+```
+
+- [ ] **Step 3: Write the middleware**
 
 ```ts
 // crm-dashboard/middleware.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { isValidAuthToken } from '@/lib/auth'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (
@@ -515,7 +631,7 @@ export function middleware(request: NextRequest) {
   }
 
   const authCookie = request.cookies.get('crm_auth')?.value
-  if (authCookie === process.env.CRM_PASSWORD) {
+  if (await isValidAuthToken(authCookie, process.env.CRM_PASSWORD ?? '')) {
     return NextResponse.next()
   }
 
@@ -529,18 +645,22 @@ export const config = {
 }
 ```
 
-- [ ] **Step 3: Write the login route**
+- [ ] **Step 4: Write the login route**
 
 ```ts
 // crm-dashboard/app/api/login/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { createAuthToken, constantTimeEqual, safeRedirectPath } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
-  const password = formData.get('password')
-  const from = (formData.get('from') as string) || '/'
+  const password = String(formData.get('password') ?? '')
+  const from = safeRedirectPath(formData.get('from') as string)
 
-  if (password !== process.env.CRM_PASSWORD) {
+  const expected = process.env.CRM_PASSWORD ?? ''
+  const passwordMatches = password.length === expected.length && constantTimeEqual(password, expected)
+
+  if (!passwordMatches) {
     const loginUrl = new URL('/login', request.url)
     loginUrl.searchParams.set('from', from)
     loginUrl.searchParams.set('error', '1')
@@ -548,7 +668,7 @@ export async function POST(request: NextRequest) {
   }
 
   const response = NextResponse.redirect(new URL(from, request.url))
-  response.cookies.set('crm_auth', String(password), {
+  response.cookies.set('crm_auth', await createAuthToken(expected), {
     httpOnly: true,
     secure: true,
     sameSite: 'lax',
@@ -558,7 +678,7 @@ export async function POST(request: NextRequest) {
 }
 ```
 
-- [ ] **Step 4: Write the login page**
+- [ ] **Step 5: Write the login page**
 
 ```tsx
 // crm-dashboard/app/login/page.tsx
@@ -581,7 +701,7 @@ export default function LoginPage({
 }
 ```
 
-- [ ] **Step 5: Verify manually**
+- [ ] **Step 6: Verify manually**
 
 ```bash
 npm run dev
@@ -589,10 +709,10 @@ npm run dev
 
 Visit `http://localhost:3000` — expect a redirect to `/login`. Enter a wrong password from `.env.local` (`CRM_PASSWORD=test123`) — expect an error message. Enter the correct password — expect a redirect back to `/` (page not built yet, 404 is fine at this step).
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
-git add crm-dashboard/app/api crm-dashboard/app/login crm-dashboard/middleware.ts
+git add crm-dashboard/app/api crm-dashboard/app/login crm-dashboard/middleware.ts crm-dashboard/lib/auth.ts crm-dashboard/lib/auth.test.ts
 git commit -m "feat: add password-gate middleware and Stripe webhook route"
 ```
 
