@@ -152,6 +152,8 @@ create table leads (
   status text not null default 'ny' check (status in ('ny', 'kontaktad')),
   interested_course_date_id uuid references course_dates(id),
   stripe_checkout_session_id text unique,
+  is_subscriber boolean,
+  note text,
   created_at timestamptz not null default now()
 );
 
@@ -1050,7 +1052,9 @@ Visit `https://crm.pauspling.com`, log in with the real password, confirm the se
 
 ## Known gap: Google-formuläret
 
-This plan does not include a sync from the Google Form (leads' current main source). That was flagged in the spec as an open point — Paulina hasn't shared access to the response sheet yet. Once she does, add a follow-up task: either a scheduled sync job (Google Sheets API → `leads` table, using the same `createLead`-style insert with `source: 'formulär'`) or a one-off/manual import script like `scripts/import-csv.ts`, depending on how she wants to export the sheet. Until then, use the manual "Lägg till lead" form for anything coming from the form.
+This plan does not include an automated sync from the Google Form (leads' current main source). Its response sheet is confirmed at `https://docs.google.com/spreadsheets/d/1B184Mj34kUV3wvROTMB_6uIM7s_iJUijvlLYm3zzzLk` (sheet "Formulärsvar 1", ~60 rows as of 2026-09-09), with columns: Tidstämpel, E-postadress, För- och efternamn, datumpreferens (multi-value), prenumerant (Ja/Nej/Vet ej), fritext. The `leads` table already has `is_subscriber` and `note` columns to receive this (Task 2).
+
+What's still missing is a *production* sync mechanism — reading the sheet from inside this brainstorming session (via an authenticated browser fetch) doesn't carry over to the deployed app, which needs its own Google credential. Follow-up task once ready to build it: a Google service account with read access to the sheet, a Sheets API `values.get` call in a scheduled job or a manual "Sync now" button, mapping rows to `leads` inserts (`source: 'formulär'`, dedup via `isPossibleDuplicate` from `lib/matching.ts`, same as the webhook handler). Until then, use the manual "Lägg till lead" form (Task 8) for anything coming from the form.
 
 ## Notes for the next project (bokningssida)
 

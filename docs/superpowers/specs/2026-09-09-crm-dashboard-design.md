@@ -12,7 +12,7 @@ Målet är ett samlat internt verktyg som ersätter CSV-filerna och den manuella
 ## Datakällor
 
 - **Stripe** (kontot Pauspling, livemode) — enda källan till betalningar och "nästan-betalare" (påbörjade men utgångna/övergivna checkout-sessioner).
-- **Google-formulär** — befintlig huvudkälla för intresseanmälningar/väntelista (motsvarar dagens `intresseanmalda_ej_betalt.csv`). Åtkomst till svarsarket är inte ordnad än — se Öppna punkter.
+- **Google-formulär** — befintlig huvudkälla för intresseanmälningar/väntelista (motsvarar dagens `intresseanmalda_ej_betalt.csv`). Verkliga fält (bekräftade 2026-09-09 mot det publicerade svarsarket): Tidstämpel, E-postadress, För- och efternamn, "Vilka datum/tider kan eller föredrar du?" (flerval), "Är du betalande prenumerant av mitt nyhetsbrev?" (Ja/Nej/Vet ej), fritextfråga om önskemål. Produktionssynk kräver en Google-tjänstekontonyckel — se Öppna punkter.
 - **Manuell inmatning** — för leads som kommer in via mejl/Slack/LinkedIn utanför formuläret.
 
 ## Arkitektur
@@ -29,7 +29,7 @@ Målet är ett samlat internt verktyg som ersätter CSV-filerna och den manuella
 
 - **`course_dates`** — kurstillfällen: datum, spår (svenska / Menti-engelska), kapacitet.
 - **`participants`** — bekräftade betalande: namn, e-post, belopp, rabattkod (om någon), koppling till `course_date`, koppling till Stripe-betalning, checkbox "Zoom-inbjudan skickad".
-- **`leads`** — allt som inte betalat: namn, e-post, källa (formulär / manuellt / nästan-betalare), status ("ny" / "kontaktad"), valfri koppling till ett kommande `course_date` (för att signalera "vill gå den här kursen").
+- **`leads`** — allt som inte betalat: namn, e-post, källa (formulär / manuellt / nästan-betalare), status ("ny" / "kontaktad"), valfri koppling till ett kommande `course_date` (för att signalera "vill gå den här kursen"), samt två fält specifika för formulärsvar: `is_subscriber` (nyhetsbrevsprenumerant, påverkar pris) och `note` (fritextönskemål/datumpreferens som text tills vidare).
 
 ## Vyer och funktioner
 
