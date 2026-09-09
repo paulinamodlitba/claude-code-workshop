@@ -1,95 +1,48 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from 'next/link'
+import { createServerSupabaseClient } from '@/lib/supabase'
 
-export default function Home() {
+export default async function HomePage() {
+  const supabase = createServerSupabaseClient()
+
+  const { data: courseDates } = await supabase
+    .from('course_dates')
+    .select('id, date, track, capacity')
+    .order('date', { ascending: true })
+
+  const { data: participants } = await supabase
+    .from('participants')
+    .select('course_date_id, zoom_invite_sent')
+
+  const { data: leads } = await supabase.from('leads').select('interested_course_date_id')
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <main style={{ maxWidth: 800, margin: '40px auto' }}>
+      <h1>Kurstillfällen</h1>
+      <ul>
+        {(courseDates ?? []).map((courseDate) => {
+          const participantsForDate = (participants ?? []).filter(
+            (p) => p.course_date_id === courseDate.id
+          )
+          const waitlistForDate = (leads ?? []).filter(
+            (l) => l.interested_course_date_id === courseDate.id
+          )
+          const missingZoom = participantsForDate.some((p) => !p.zoom_invite_sent)
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          return (
+            <li key={courseDate.id} style={{ marginBottom: 16 }}>
+              <Link href={`/kurstillfalle/${courseDate.id}`}>
+                {courseDate.date} ({courseDate.track})
+              </Link>{' '}
+              — {participantsForDate.length}/{courseDate.capacity} betalande,{' '}
+              {waitlistForDate.length} på väntelista
+              {missingZoom && <strong style={{ color: 'crimson' }}> ⚠ Zoom saknas</strong>}
+            </li>
+          )
+        })}
+      </ul>
+      <nav style={{ marginTop: 32 }}>
+        <Link href="/leads">Leads</Link> · <Link href="/statistik">Statistik</Link>
+      </nav>
+    </main>
+  )
 }
