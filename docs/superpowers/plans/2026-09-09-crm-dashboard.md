@@ -69,7 +69,7 @@ npx create-next-app@14 crm-dashboard --typescript --tailwind=false --eslint --ap
 ```bash
 cd crm-dashboard
 npm install @supabase/supabase-js stripe
-npm install -D vitest
+npm install -D vitest tsx dotenv
 ```
 
 - [ ] **Step 3: Add Vitest config**
@@ -1068,21 +1068,57 @@ git commit -m "feat: add statistik page"
 
 - [ ] **Step 1: Write the import script**
 
+The real `deltagare_*.csv` files have quoted `Notering` values containing commas (and one has an escaped `""..""` quote inside a quoted field), so this needs a real CSV line parser, not a naive `split(',')`.
+
 ```ts
 // crm-dashboard/scripts/import-csv.ts
+import { config } from 'dotenv'
 import { createClient } from '@supabase/supabase-js'
 import { readFileSync } from 'node:fs'
 
+config({ path: '.env.local' })
+
 const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+
+function parseCsvLine(line: string): string[] {
+  const values: string[] = []
+  let current = ''
+  let inQuotes = false
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i]
+
+    if (inQuotes) {
+      if (char === '"' && line[i + 1] === '"') {
+        current += '"'
+        i++
+      } else if (char === '"') {
+        inQuotes = false
+      } else {
+        current += char
+      }
+    } else if (char === '"') {
+      inQuotes = true
+    } else if (char === ',') {
+      values.push(current)
+      current = ''
+    } else {
+      current += char
+    }
+  }
+  values.push(current)
+
+  return values.map((v) => v.trim())
+}
 
 function parseCsv(content: string): Record<string, string>[] {
   const [headerLine, ...lines] = content.trim().split('\n')
-  const headers = headerLine.split(',').map((h) => h.trim())
+  const headers = parseCsvLine(headerLine)
   return lines
     .filter((line) => line.trim().length > 0)
     .map((line) => {
-      const values = line.split(',')
-      return Object.fromEntries(headers.map((h, i) => [h, (values[i] ?? '').trim()]))
+      const values = parseCsvLine(line)
+      return Object.fromEntries(headers.map((h, i) => [h, values[i] ?? '']))
     })
 }
 
@@ -1117,9 +1153,7 @@ main()
 
 - [ ] **Step 2: Verify manually**
 
-Open one existing `deltagare_<datum>.csv` (e.g. `deltagare_28aug.csv`) and confirm none of its `Notering` values contain a comma — this parser splits naively on commas and will misalign columns if a field contains one. If any do, quote-wrap that value or fix it by hand before importing.
-
-Then, after creating a real `course_dates` row for that date (Task 11), run:
+Run `npm install -D dotenv` if not already installed (Task 1 covers this). After creating a real `course_dates` row for that date (Task 11), run:
 
 ```bash
 npx tsx scripts/import-csv.ts ../deltagare_28aug.csv <course_date_id>
