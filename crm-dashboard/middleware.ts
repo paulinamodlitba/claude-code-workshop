@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isValidAuthToken } from '@/lib/auth'
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   if (
@@ -12,7 +13,7 @@ export function middleware(request: NextRequest) {
   }
 
   const authCookie = request.cookies.get('crm_auth')?.value
-  if (authCookie === process.env.CRM_PASSWORD) {
+  if (await isValidAuthToken(authCookie, process.env.CRM_PASSWORD ?? '')) {
     return NextResponse.next()
   }
 

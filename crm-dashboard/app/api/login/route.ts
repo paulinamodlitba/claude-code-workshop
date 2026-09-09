@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createAuthToken, constantTimeEqual, safeRedirectPath } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
-  const password = formData.get('password')
-  const from = (formData.get('from') as string) || '/'
+  const password = String(formData.get('password') ?? '')
+  const from = safeRedirectPath(formData.get('from') as string)
 
-  if (password !== process.env.CRM_PASSWORD) {
+  const expected = process.env.CRM_PASSWORD ?? ''
+  const passwordMatches = password.length === expected.length && constantTimeEqual(password, expected)
+
+  if (!passwordMatches) {
     const loginUrl = new URL('/login', request.url)
     loginUrl.searchParams.set('from', from)
     loginUrl.searchParams.set('error', '1')
@@ -13,7 +17,7 @@ export async function POST(request: NextRequest) {
   }
 
   const response = NextResponse.redirect(new URL(from, request.url))
-  response.cookies.set('crm_auth', String(password), {
+  response.cookies.set('crm_auth', await createAuthToken(expected), {
     httpOnly: true,
     secure: true,
     sameSite: 'lax',
